@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './examples/video-2/3-popstate-listener';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
