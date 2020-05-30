@@ -14,7 +14,10 @@ const onMount = (
   
 }
 
-export const loadTodo = () => {
+export const loadTodo = (
+  todos,
+  setTodos,
+) => {
   fetch('https://reqres.in/api/users?page=2')
     .then(resp => resp.json())
     .then(json => {
