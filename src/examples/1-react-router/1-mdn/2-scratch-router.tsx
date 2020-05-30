@@ -1,9 +1,9 @@
 import React from 'react';
 
 const App = () => {
-  const href = window.location.href;
+  const url = window.location.href;
   let innerComponent: JSX.Element;
-  switch (href) {
+  switch (url) {
     case '/':
       innerComponent = <Home />;
       break;

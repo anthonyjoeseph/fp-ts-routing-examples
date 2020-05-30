@@ -3,18 +3,18 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [location, setLocation] = useState(window.location.href);
-  const updateLocation = (newLocation: string) => {
-    setLocation(newLocation);
-    window.history.pushState(counter, '', newLocation);
-    // window.history.replaceState(counter, '', newLocation);
+  const [url, setUrl] = useState(window.location.href);
+  const updateUrl = (newurl: string) => {
+    setUrl(newurl);
+    window.history.pushState(counter, '', newurl);
+    // window.history.replaceState(counter, '', newurl);
   }
   window.onpopstate = (ev: PopStateEvent) => {
     setCounter(ev.state as number)
-    setLocation(window.location.href);
+    setUrl(window.location.href);
   }
   let innerComponent: JSX.Element;
-  switch (location) {
+  switch (url) {
     case '/':
       innerComponent = <Home />;
       break;
@@ -23,6 +23,9 @@ const App = () => {
       break;
     case '/users':
       innerComponent =  <Users />;
+      break;
+    default:
+      innerComponent = <div />;
       break;
   }
   return (
@@ -36,21 +39,21 @@ const App = () => {
         <ul>
           <li>
             <a
-              onClick={() => updateLocation('/')}
+              onClick={() => updateUrl('/')}
             >
               Home
             </a>
           </li>
           <li>
             <a
-              onClick={() => updateLocation('/about')}
+              onClick={() => updateUrl('/about')}
             >
               About
             </a>
           </li>
           <li>
             <a
-              onClick={() => updateLocation('/users')}
+              onClick={() => updateUrl('/users')}
             >
               Users
             </a>

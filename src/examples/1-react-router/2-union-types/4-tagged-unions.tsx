@@ -77,7 +77,8 @@ const format = (parsed: Location): string => {
 
 
 const componentFromLocation = (
-  location: Location
+  location: Location,
+  setLocation: (l: Location) => void,
 ): JSX.Element => {
   switch (location.type) {
     case 'Home':
@@ -87,10 +88,12 @@ const componentFromLocation = (
     case 'Topics':
       return  <Topics
         location={location}
+        setLocation={setLocation}
       />;
     case 'TopicsID':
       return <Topics
         location={location}
+        setLocation={setLocation}
       />;
     case 'NotFound':
       return <div />
@@ -146,7 +149,7 @@ const App = () => {
           </a>
         </li>
       </ul>
-      {componentFromLocation(location)}
+      {componentFromLocation(location, setLocation)}
     </div>
   );
 }

@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {  useState } from 'react';
 
-type Location = '/' | '/about' | '/users' | 'not-found'
+type url = '/' | '/about' | '/users' | 'not-found'
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [location, setLocation] = useState<Location>(window.location.href as Location);
-  const updateLocation = (newLocation: Location) => {
-    setLocation(newLocation);
-    window.history.pushState(null, '', newLocation);
+  const [url, setUrl] = useState<url>(window.location.href as url);
+  const updateUrl = (newurl: url) => {
+    setUrl(newurl);
+    window.history.pushState(null, '', newurl);
   }
   window.onpopstate = () => {
-    setLocation(window.location.href as Location);
+    setUrl(window.location.href as url);
   }
   let innerComponent: JSX.Element;
-  switch (location) {
+  switch (url) {
     case '/':
       innerComponent = <Home />;
       break;
@@ -42,21 +42,21 @@ const App = () => {
         <ul>
           <li>
             <a
-              onClick={() => updateLocation('/')}
+              onClick={() => updateUrl('/')}
             >
               Home
             </a>
           </li>
           <li>
             <a
-              onClick={() => updateLocation('/about')}
+              onClick={() => updateUrl('/about')}
             >
               About
             </a>
           </li>
           <li>
             <a
-              onClick={() => updateLocation('/users')}
+              onClick={() => updateUrl('/users')}
             >
               Users
             </a>

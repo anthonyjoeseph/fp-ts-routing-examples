@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './examples/video-2/3-popstate-listener';
+import App from './examples/3-redux-observable/1-events/3-fetch-todo/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

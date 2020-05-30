@@ -2,9 +2,9 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const href = window.location.href;
+  const url = window.location.href;
   let innerComponent: JSX.Element;
-  switch (href) {
+  switch (url) {
     case '/':
       innerComponent = <Home />;
       break;

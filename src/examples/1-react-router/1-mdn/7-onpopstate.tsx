@@ -3,16 +3,16 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [location, setLocation] = useState(window.location.href);
-  const updateLocation = (newLocation: string) => {
-    setLocation(newLocation);
+  const [url, setUrl] = useState(window.location.href);
+  const updateUrl = (newLocation: string) => {
+    setUrl(newLocation);
     window.history.pushState(null, '', newLocation);
   }
   window.onpopstate = () => {
-    setLocation(window.location.href);
+    setUrl(window.location.href);
   }
   let innerComponent: JSX.Element;
-  switch (location) {
+  switch (url) {
     case '/':
       innerComponent = <Home />;
       break;
@@ -37,21 +37,21 @@ const App = () => {
         <ul>
           <li>
             <a
-              onClick={() => updateLocation('/')}
+              onClick={() => updateUrl('/')}
             >
               Home
             </a>
           </li>
           <li>
             <a
-              onClick={() => updateLocation('/about')}
+              onClick={() => updateUrl('/about')}
             >
               About
             </a>
           </li>
           <li>
             <a
-              onClick={() => updateLocation('/users')}
+              onClick={() => updateUrl('/users')}
             >
               Users
             </a>
