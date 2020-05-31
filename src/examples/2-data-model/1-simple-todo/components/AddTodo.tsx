@@ -12,7 +12,7 @@ const AddTodo = ({
         onSubmit={e => {
           e.preventDefault()
           if (!text.trim()) {
-            return
+            return;
           }
           addTodo(text);
         }}

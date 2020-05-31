@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { TodoType, defaultTodos, TodoVisibility } from './AppState';
+import { TodoType, defaultTodos, VisibilityFilter } from './AppState';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import Footer from './components/Footer';
 
 const App = () => {
   const [todos, setTodos] = useState<TodoType[]>(defaultTodos);
-  const [todoVisibility, setTodoVisibility] = useState<TodoVisibility>('SHOW_ALL');
+  const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>('SHOW_ALL');
   return (
     <div>
       <AddTodo
         addTodo={(text) => {
-          const highestID = todos.length < 0 
+          const highestID = todos.length > 0 
             ? todos.reduce(
                 (acc, cur) => cur.id > acc.id
                   ? cur
@@ -28,7 +28,7 @@ const App = () => {
       />
       <TodoList
         todos={todos}
-        visibility={todoVisibility}
+        visibility={visibilityFilter}
         toggleTodo={(id) => {
           const newTodos = todos.map(
             t => t.id === id
@@ -42,8 +42,8 @@ const App = () => {
         }}
       />
       <Footer
-        todoVisibility={todoVisibility}
-        setTodoVisibility={setTodoVisibility}
+        visibilityFilter={visibilityFilter}
+        setVisibilityFilter={setVisibilityFilter}
       />
     </div>
   )

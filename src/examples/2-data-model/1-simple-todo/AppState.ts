@@ -3,7 +3,7 @@ export interface TodoType {
   text: string;
   completed: boolean;
 }
-export type TodoVisibility = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_COMPLETED'
+export type VisibilityFilter = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_COMPLETED'
 
 export const defaultTodos: TodoType[] = [
   {

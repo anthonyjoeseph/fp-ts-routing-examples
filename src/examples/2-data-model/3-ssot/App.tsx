@@ -1,29 +1,45 @@
 import React, { useState } from 'react';
-import { TodoType, defaultTodos, TodoVisibility } from '../1-simple-todo/AppState';
+import { TodoType, defaultTodos, VisibilityFilter } from '../1-simple-todo/AppState';
 import AddTodo from '../1-simple-todo/components/AddTodo';
 import TodoList from '../1-simple-todo/components/TodoList';
 import Footer from '../1-simple-todo/components/Footer';
-import { urlToTodoVisibility, todoVisibilityToUrl } from './AppRoute';
+import { routeToVisibilityFilter, VisibilityFilterToRoute, parse, format } from './Location';
 
 const App = () => {
   const [todos, setTodos] = useState<TodoType[]>(defaultTodos);
-  const [todoVisibility, setTodoVisibility] = useState<TodoVisibility>(
-    urlToTodoVisibility(window.location.href),
+  const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>(
+    routeToVisibilityFilter(
+      parse(
+        window.location.href
+      )
+    ),
   );
   window.onpopstate = () => {
-    setTodoVisibility(
-      urlToTodoVisibility(window.location.href),
+    setVisibilityFilter(
+      routeToVisibilityFilter(
+        parse(
+          window.location.href,
+        )
+      )
     )
   }
-  const updateTodoVisibility = (newVisibility: TodoVisibility) => {
-    window.history.pushState(null, '', todoVisibilityToUrl(newVisibility))
-    setTodoVisibility(newVisibility)
+  const updateVisibilityFilter = (newVisibility: VisibilityFilter) => {
+    window.history.pushState(
+      null,
+      '',
+      format(
+        VisibilityFilterToRoute(
+          newVisibility
+        )
+      )
+    )
+    setVisibilityFilter(newVisibility)
   }
   return (
     <div>
       <AddTodo
         addTodo={(text) => {
-          const highestID = todos.length < 0 
+          const highestID = todos.length > 0 
             ? todos.reduce(
                 (acc, cur) => cur.id > acc.id
                   ? cur
@@ -40,7 +56,7 @@ const App = () => {
       />
       <TodoList
         todos={todos}
-        visibility={todoVisibility}
+        visibility={visibilityFilter}
         toggleTodo={(id) => {
           const newTodos = todos.map(
             t => t.id === id
@@ -54,8 +70,8 @@ const App = () => {
         }}
       />
       <Footer
-        todoVisibility={todoVisibility}
-        setTodoVisibility={updateTodoVisibility}
+        visibilityFilter={visibilityFilter}
+        setVisibilityFilter={updateVisibilityFilter}
       />
     </div>
   )

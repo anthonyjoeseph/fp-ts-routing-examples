@@ -1,6 +1,6 @@
 import React from 'react';
 import Todo from './Todo';
-import { TodoVisibility, TodoType } from '../AppState';
+import { VisibilityFilter, TodoType } from '../AppState';
 
 const TodoList = ({
   todos,
@@ -8,7 +8,7 @@ const TodoList = ({
   toggleTodo
 }: {
   todos: TodoType[];
-  visibility: TodoVisibility;
+  visibility: VisibilityFilter;
   toggleTodo: (id: number) => void;
 }) => {
   let visibileTodos: TodoType[];
