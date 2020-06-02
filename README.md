@@ -1,44 +1,64 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Cirriculum
+  1. React Router
+      1. MDN & Browser window API
+          1. React Router
+          2. Scratch Router
+          3. Clobbered State
+          4. Set Href
+          5. pushState redirect
+          6. Location in State
+          7. onpopstate
+          8. Bonus - Why state?
+      2. Union Types
+          1. Union types
+          2. Exhaustiveness Checking
+          3. React Router Params
+          4. Tagged Unions
+      3. fp-ts-routing
+          1. Parser
+          2. Full Example
+          3. Bonus: Ints, Queries and Types
+      4. morphic-ts
+          1. makeADT, of & as
+          2. morphic-ts-routing
+          3. full example
+          4. select
+          5. Bonus: smart constructor
+          6. Bonus: other sum type libraries
+  - (Optional) Next.js & SSR
+      1. Overview
+      2. Async
+      3. Routing
+      4. Bonus: prefetch
+  2. Data Model
+      1. TodoMVC
+      2. react-testing-library
+      3. router
+      4. SSOT
+      5. test
+  3. Reactive Architecture with Redux
+      1. redux
+          1. global state
+          2. store and reducer
+          3. morphic-ts
+          4. test
+          5. router attempt (failure)
+          6. Bonus: monocle-ts
+      2. rxjs
+          1. currying
+          2. rxjs
+          3. Bonus: testing the router with rxjs
+      3. redux-observable
+          1. onpopstate
+          2. pushState
+          3. Test the epic
 
-In the project directory, you can run:
+## Running the Example Code
 
-### `yarn start`
+You can run the code in this repository by pointing the `App` component import in `src/index.ts` to the `App.ts` file corresponding to the video.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+(TODO) Must rename all files in '1 - react router' to App.ts
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
