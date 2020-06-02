@@ -3,7 +3,7 @@
   1. React Router
       1. MDN & Browser window API
           1. React Router
-          2. Scratch Router
+          2. Router from Scratch
           3. Clobbered State
           4. Set Href
           5. pushState redirect
