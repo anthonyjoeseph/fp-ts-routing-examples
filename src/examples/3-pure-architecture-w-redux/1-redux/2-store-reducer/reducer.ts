@@ -9,9 +9,9 @@ export const reducer: Reducer<AppState, AppAction> = (
   if (state === undefined) {
     return defaultAppState;
   }
+  const { todos } = state;
   switch (action.type) {
     case 'ADD_TODO':
-      const { todos } = state;
       const highestID = todos.length > 0 
         ? todos.reduce(
             (acc, cur) => cur.id > acc.id

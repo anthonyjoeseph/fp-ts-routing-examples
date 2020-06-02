@@ -21,7 +21,7 @@ export const routeToVisibilityFilter = Location.matchStrict<VisibilityFilter>({
   NotFound: () => 'SHOW_ALL',
 })
 
-export const VisibilityFilterToRoute = (visibility: VisibilityFilter): Location => {
+export const visibilityFilterToRoute = (visibility: VisibilityFilter): Location => {
   switch (visibility) {
     case 'SHOW_ALL':
       return Location.of.Landing({ value: {} });

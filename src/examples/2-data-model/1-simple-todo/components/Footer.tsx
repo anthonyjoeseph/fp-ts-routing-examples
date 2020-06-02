@@ -12,18 +12,21 @@ const Footer = ({
   <div>
     <span>Show: </span>
     <Link
+      aria-label="Show All"
       onClick={() => setVisibilityFilter('SHOW_ALL')}
       active={visibilityFilter === 'SHOW_ALL'}
     >
       All
     </Link>
     <Link
+      aria-label="Show Active"
       onClick={() => setVisibilityFilter('SHOW_ACTIVE')}
       active={visibilityFilter === 'SHOW_ACTIVE'}
     >
       Active
     </Link>
     <Link
+      aria-label="Show Completed"
       onClick={() => setVisibilityFilter('SHOW_COMPLETED')}
       active={visibilityFilter === 'SHOW_COMPLETED'}
     >

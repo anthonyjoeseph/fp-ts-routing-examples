@@ -1,13 +1,13 @@
 import React from 'react';
-import { defaultAppState, AppState } from '../1-global-state/AppState';
+import { defaultAppState } from '../1-global-state/AppState';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { AppAction } from './AppAction';
-import { reducer } from './reducer';
+import { safeReducer, curriedReducer } from './reducer';
 import ReduxApp from './ReduxApp';
+import { AppAction } from './AppAction';
 
-let store = createStore<AppState, AppAction, {}, {}>(
-  reducer,
+let store = createStore(
+  safeReducer(curriedReducer, defaultAppState, AppAction),
   defaultAppState,
 );
 

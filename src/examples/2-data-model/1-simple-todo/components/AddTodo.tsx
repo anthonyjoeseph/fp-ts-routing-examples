@@ -19,10 +19,16 @@ const AddTodo = ({
       >
         <input
           type="text"
+          aria-label="New Todo Text"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit">Add Todo</button>
+        <button
+          aria-label="Add Todo"
+          type="submit"
+        >
+          Add Todo
+        </button>
       </form>
     </div>
   )

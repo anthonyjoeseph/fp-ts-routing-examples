@@ -10,6 +10,7 @@ const Todo = ({
   text: string;
 }) => (
   <li
+    aria-label={`todo: ${text}`}
     onClick={onClick}
     style={{
       textDecoration: completed ? 'line-through' : 'none'

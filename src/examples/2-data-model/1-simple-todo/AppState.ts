@@ -8,7 +8,7 @@ export type VisibilityFilter = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_COMPLETED'
 export const defaultTodos: TodoType[] = [
   {
     id: 0,
-    text: 'Learn Redux',
+    text: 'Learn fp-ts-routing',
     completed: false,
   },
   {
