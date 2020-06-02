@@ -27,7 +27,7 @@
           5. Bonus: smart constructor
           6. Bonus: other sum type libraries
   - (Optional) Next.js & SSR
-      1. Overview
+      1. Overview - Express + ReactDOM
       2. Async
       3. Routing
       4. Bonus: prefetch
