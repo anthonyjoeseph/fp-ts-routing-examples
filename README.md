@@ -9,7 +9,7 @@
           5. pushState redirect
           6. Location in State
           7. onpopstate
-          8. Bonus - Why state?
+          8. Bonus - What's history state?
       2. Union Types
           1. Union types
           2. Exhaustiveness Checking
