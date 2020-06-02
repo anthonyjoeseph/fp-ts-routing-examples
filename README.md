@@ -46,7 +46,7 @@
           5. router attempt (failure)
           6. Bonus: monocle-ts
       2. rxjs
-          1. currying
+          1. currying, pipe & flow
           2. rxjs
           3. Bonus: testing the router with rxjs
       3. redux-observable
