@@ -5,22 +5,14 @@
   "dependencies": {
     "@iadvize-oss/foldable-helpers": "^1.0.4",
     "@morphic-ts/adt": "^2.0.0-alpha.4",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/history": "^4.7.6",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
     "daggy": "^1.4.0",
+    "express": "^4.17.1",
     "fp-ts-routing": "^0.5.3",
     "fp-ts-rxjs": "^0.6.9",
     "io-ts": "^2.2.3",
     "monocle-ts": "^2.1.1",
     "morphic-ts-routing": "^0.0.45",
+    "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -29,6 +21,7 @@
     "redux": "^4.0.5",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.5",
+    "serialize-javascript": "^3.1.0",
     "typescript": "~3.7.2",
     "unionize": "^3.1.0"
   },
@@ -36,7 +29,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev:build-server": "NODE_ENV=development webpack --config webpack.server.js --mode=development -w",
+    "dev:start": "nodemon --exec 'ts-node' ./server-build/server.js",
+    "dev": "npm-run-all --parallel dev:*"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,7 +50,24 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@types/assert": "^1.4.7",
-    "assert": "^2.0.0"
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/node-fetch": "^2.5.7",
+    "@types/express": "^4.17.6",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/serialize-javascript": "^1.5.0",
+    "assert": "^2.0.0",
+    "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5",
+    "ts-loader": "^7.0.5",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
   }
 }

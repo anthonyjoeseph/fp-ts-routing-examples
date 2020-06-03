@@ -56,7 +56,7 @@
       4. TodoMVC in purer reactive architectures
           1. [Elm](https://github.com/kadikraman/elm-todo/blob/master/src/Main.elm)
           2. [Reflex](https://github.com/reflex-frp/reflex-todomvc/blob/develop/src/Reflex/TodoMVC.hs)
-          3. [Halogen (not reactive, but influenced by it)](https://github.com/holdenlee/halogen-todo/blob/master/src/Main.purs)
+          3. [Halogen](https://github.com/holdenlee/halogen-todo/blob/master/src/Main.purs)
 
 ## Running the Example Code
 
@@ -64,5 +64,8 @@ You can run the code in this repository by pointing the `App` component import i
 
 (TODO) Must rename all files in '1 - react router' to `App.ts` for consistency
 
+## SSR Setup
+
+[Express SSR addition to create-react-app](https://gist.github.com/anthonyjoeseph/bdcf9be5cfc515cad334b687237c1556)
 
 ### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
