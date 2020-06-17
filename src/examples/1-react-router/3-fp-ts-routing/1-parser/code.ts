@@ -1,4 +1,4 @@
-import { end, lit, int, parse, format, Route, str } from "fp-ts-routing"
+import { end, lit, parse, format, Route, str } from "fp-ts-routing"
 
 interface Home {
   readonly type: 'Home'

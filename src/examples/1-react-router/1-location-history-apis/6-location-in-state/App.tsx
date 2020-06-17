@@ -1,6 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {  useState } from 'react';
 
+const Link = ({
+  to,
+  children,
+}: {
+  to: string;
+  children: string;
+}) => (
+  <a
+    onClick={() => {
+      window.history.pushState(null, '', '/about');
+    }}
+  >
+    {children}
+  </a>
+);
+
 const App = () => {
   const [counter, setCounter] = useState(0);
   const [location, setLocation] = useState(window.location.pathname);
