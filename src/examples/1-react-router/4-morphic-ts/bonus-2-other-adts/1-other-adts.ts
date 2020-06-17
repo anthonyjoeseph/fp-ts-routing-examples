@@ -1,7 +1,7 @@
 import { makeADT, ofType, ADTType } from "@morphic-ts/adt";
 import { unionize, ofType as unionizeOfType, UnionOf } from 'unionize';
 import { createFoldObject } from '@iadvize-oss/foldable-helpers';
-import { fold as codegenFold, CodegenLocation } from "./bonus-2.3-fp-ts-codegen";
+import { fold as codegenFold, CodegenLocation } from "./3-fp-ts-codegen";
 
 // sum type creation
 

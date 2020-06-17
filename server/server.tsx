@@ -1,7 +1,7 @@
 // server/server.tsx
 
 import express from 'express';
-import handleRoute from '../src/examples/optional-next-js/3-async/handleRoute';
+import handleRoute from '../src/examples/optional-next-js/5-hydration-safe-fetch/handleRoute';
 
 const PORT = process.env.PORT || 3006;
 const app = express();

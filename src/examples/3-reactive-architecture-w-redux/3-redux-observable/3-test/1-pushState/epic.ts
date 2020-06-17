@@ -20,14 +20,11 @@ const epic = (
 ) => r.merge(
   pipe(
     popstate$,
-    ro.map(() => {
-      const four = 3;
-      return pipe(
-        hrefThunk(),
-        parse,
-        routeToVisibilityFilter
-      );
-    }),
+    ro.map(() => pipe(
+      hrefThunk(),
+      parse,
+      routeToVisibilityFilter
+    )),
     ro.map(filter => AppAction.of.SET_VISIBILITY_FILTER({
       filter,
     })),
