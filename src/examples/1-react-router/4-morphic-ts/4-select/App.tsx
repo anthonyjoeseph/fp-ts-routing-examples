@@ -105,7 +105,7 @@ function Topics({
         <li>
           <a
             onClick={() => setLocation(
-              TopicLocation.of.Topics({ value: { id: 'components' } })
+              TopicLocation.of.TopicsID({ value: { id: 'components' } })
             )}
           >
             Components

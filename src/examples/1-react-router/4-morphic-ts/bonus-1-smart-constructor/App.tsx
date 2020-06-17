@@ -9,13 +9,16 @@ import React, { useState } from 'react';
 const {
   parse,
   format,
-  adt: Location
+  adt: ParseableLocation
 } = routingFromMatches4(
   ['Home', end],
   ['About', lit('about').then(end)],
   ['Topics', lit('topics').then(end)],
   ['TopicsID', lit('topics').then(str('id')).then(end)],
 );
+type ParseableLocation = ADTType<typeof ParseableLocation>
+
+const Location = ParseableLocation.exclude(['NotFound'])
 type Location = ADTType<typeof Location>
 
 const HomeLocation = Location.select([
@@ -29,12 +32,12 @@ const TopicLocation = Location.select([
 type TopicLocation = ADTType<typeof TopicLocation>
 
 const maybeHomeLocation = O.fromPredicate(
-  (l: Location): l is HomeLocation =>
+  (l: ParseableLocation): l is HomeLocation =>
     HomeLocation.verified(l as HomeLocation)
 );
 
 const maybeTopicLocation = O.fromPredicate(
-  (l: Location): l is TopicLocation =>
+  (l: ParseableLocation): l is TopicLocation =>
     TopicLocation.verified(l as TopicLocation)
 );
 
@@ -44,7 +47,7 @@ const topicFromLocation = TopicLocation.match({
 });
 
 const App = () => {
-  const [location, setLocation] = useState<Location>(parse(window.location.pathname));
+  const [location, setLocation] = useState<ParseableLocation>(parse(window.location.pathname));
   const updateLocation = (newLocation: Location) => {
     setLocation(newLocation);
     window.history.pushState(null, '', format(newLocation));
