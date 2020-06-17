@@ -20,7 +20,7 @@
           2. Full Example
           3. Bonus: Ints, Queries and Types
       4. morphic-ts
-          1. makeADT, of & as
+          1. makeADT, of
           2. morphic-ts-routing
           3. full example
           4. select
