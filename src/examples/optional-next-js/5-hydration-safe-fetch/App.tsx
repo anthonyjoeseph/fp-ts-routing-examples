@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
+import Link from '../../1-react-router/common/Link';
 import window from './NodeSafeWindow';
 
 const App = ({
@@ -10,7 +10,7 @@ const App = ({
   const fetched = window.__INITIAL__DATA__
   const [counter, setCounter] = useState(0);
   const [url, setUrl] = useState(initialUrl);
-  const updateUrl = (newLocation: string) => {
+  const updateLocation = (newLocation: string) => {
     setUrl(newLocation);
     window.history.pushState(null, '', newLocation);
   }
@@ -43,29 +43,29 @@ const App = ({
       <nav>
         <ul>
           <li>
-            <a
-              onClick={() => updateUrl('/')}
+            <Link
+              to="/"
+              updateLocation={updateLocation}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateUrl('/about')}
+            <Link
+              to="/about"
+              updateLocation={updateLocation}
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateUrl('/users')}
+            <Link
+              to="/users"
+              updateLocation={updateLocation}
             >
               Users
-            </a>
+            </Link>
           </li>
-          <a href="/">
-            server reroute
-          </a>
         </ul>
       </nav>
         {innerComponent}
