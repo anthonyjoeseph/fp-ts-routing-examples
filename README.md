@@ -62,7 +62,7 @@
 
 You can run the code in this repository by pointing the `App` component import in `src/index.ts` to the `App.ts` file corresponding to the video.
 
-(TODO) Must rename all files in '1 - react router' to `App.ts` for consistency
+For the nextjs/ssr tutorial, you can run the code in this repository by pointing the `handleRoute` function import in `server/server.tsx` to the `handleRoute.ts` file corresponding to the video, as well as the `clientAppElement` function import in `server/hydrate.tsx`.
 
 ## SSR Setup
 
