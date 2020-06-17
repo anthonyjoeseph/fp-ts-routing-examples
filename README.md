@@ -66,6 +66,6 @@ For the nextjs/ssr tutorial, you can run the code in this repository by pointing
 
 ## SSR Setup
 
-[Express SSR addition to create-react-app](https://gist.github.com/anthonyjoeseph/bdcf9be5cfc515cad334b687237c1556)
+[Express SSR (using create-react-app)](https://gist.github.com/anthonyjoeseph/bdcf9be5cfc515cad334b687237c1556)
 
 ### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
