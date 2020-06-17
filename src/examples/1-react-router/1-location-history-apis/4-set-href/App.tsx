@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {  useState } from 'react';
+import Link from '../../common/Link';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -19,6 +19,9 @@ const App = () => {
       innerComponent = <div />;
       break;
   }
+  const updateLocation = (url: string) => {
+    window.location.pathname = url;
+  }
   return (
     <div>
       <button
@@ -29,31 +32,28 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <a
-              onClick={() => {
-                window.location.pathname = '/'
-              }}
+            <Link
+              to="/"
+              updateLocation={updateLocation}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => {
-                window.location.pathname = '/about'
-              }}
+            <Link
+              to="/about"
+              updateLocation={updateLocation}
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => {
-                window.location.pathname = '/users'
-              }}
+            <Link
+              to="/users"
+              updateLocation={updateLocation}
             >
               Users
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

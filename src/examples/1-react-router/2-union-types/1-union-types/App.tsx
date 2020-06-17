@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {  useState } from 'react';
+import Link from '../../common/Link';
 
-type url = '/' | '/about' | '/users' | 'not-found'
+type url = '/' | '/about' | '/users'
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -24,9 +25,6 @@ const App = () => {
     case '/users':
       innerComponent =  <Users />;
       break;
-    case 'not-found':
-      innerComponent= <div />;
-      break;
     /* case 'somethingelse':
       innerComponent = <Home />
       break; */
@@ -41,25 +39,28 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <a
-              onClick={() => updateUrl('/')}
+            <Link
+              to="/"
+              updateLocation={location => updateUrl(location as url)}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateUrl('/about')}
+            <Link
+              to="/about"
+              updateLocation={location => updateUrl(location as url)}
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateUrl('/users')}
+            <Link
+              to="/users"
+              updateLocation={location => updateUrl(location as url)}
             >
               Users
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

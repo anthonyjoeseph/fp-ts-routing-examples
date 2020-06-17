@@ -41,10 +41,25 @@ const maybeTopicLocation = O.fromPredicate(
     TopicLocation.verified(l as TopicLocation)
 );
 
-const topicFromLocation = TopicLocation.match({
-  Topics: () => <h3>Please select a topic.</h3>,
-  TopicsID: (l) => <Topic topicId={l.value.id} />
-});
+const Link = ({
+  to,
+  updateLocation,
+  children,
+}: {
+  to: Location;
+  updateLocation: (to: Location) => void;
+  children: string;
+}) => (
+  <a
+    href={format(to)}
+    onClick={(event) => {
+      event.preventDefault();
+      updateLocation(to);
+    }}
+  >
+    {children}
+  </a>
+);
 
 const App = () => {
   const [location, setLocation] = useState<ParseableLocation>(parse(window.location.pathname));
@@ -59,31 +74,28 @@ const App = () => {
     <div>
       <ul>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.Home({ value: {} })
-            )}
+          <Link
+            to={Location.of.Home({ value: {} })}
+            updateLocation={updateLocation}
           >
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.About({ value: {} })
-            )}
+          <Link
+            to={Location.of.About({ value: {} })}
+            updateLocation={updateLocation}
           >
             About
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.Topics({ value: {} })
-            )}
+          <Link
+            to={Location.of.Topics({ value: {} })}
+            updateLocation={updateLocation}
           >
             Topics
-          </a>
+          </Link>
         </li>
       </ul>
       {pipe(
@@ -99,7 +111,7 @@ const App = () => {
           O.map(l => (
             <Topics
               location={l}
-              setLocation={setLocation}
+              updateLocation={setLocation}
             />
           ))
         )),
@@ -119,35 +131,36 @@ function About() {
 
 function Topics({
   location,
-  setLocation,
+  updateLocation,
 }: {
   location: TopicLocation,
-  setLocation: (l: Location) => void,
+  updateLocation: (l: Location) => void,
 }) {
   return (
     <div>
       <h2>Topics</h2>
       <ul>
         <li>
-          <a
-            onClick={() => setLocation(
-              TopicLocation.of.Topics({ value: { id: 'components' } })
-            )}
+          <Link
+            to={TopicLocation.of.TopicsID({ value: { id: 'components' } })}
+            updateLocation={updateLocation}
           >
             Components
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            onClick={() => setLocation(
-              TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })
-            )}
+          <Link
+            to={TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })}
+            updateLocation={updateLocation}
           >
             Props v. State
-          </a>
+          </Link>
         </li>
       </ul>
-      {topicFromLocation(location)}
+      {TopicLocation.match({
+        Topics: () => <h3>Please select a topic.</h3>,
+        TopicsID: (l) => <Topic topicId={l.value.id} />
+      })(location)}
     </div>
   );
 }

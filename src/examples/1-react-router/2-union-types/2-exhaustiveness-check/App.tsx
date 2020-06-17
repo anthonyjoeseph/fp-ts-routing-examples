@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {  useState } from 'react';
+import Link from '../../common/Link';
 
-type Location = '/' | '/about' | '/users' | 'not-found'
+type Location = '/' | '/about' | '/users'
 
 const componentFromLocation = (
   location: Location
@@ -13,8 +14,6 @@ const componentFromLocation = (
       return  <About />;
     case '/users':
       return  <Users />;
-    case 'not-found':
-      return <div />;
 /*  case 'somethingelse':
       return <Home /> */
   }
@@ -41,25 +40,28 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <a
-              onClick={() => updateLocation('/')}
+            <Link
+              to="/"
+              updateLocation={location => updateLocation(location as Location)}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateLocation('/about')}
+            <Link
+              to="/about"
+              updateLocation={location => updateLocation(location as Location)}
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateLocation('/users')}
+            <Link
+              to="/users"
+              updateLocation={location => updateLocation(location as Location)}
             >
               Users
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

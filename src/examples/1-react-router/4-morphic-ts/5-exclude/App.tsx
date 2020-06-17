@@ -4,7 +4,7 @@ import { end, lit, str, } from 'fp-ts-routing';
 import { routingFromMatches4 } from 'morphic-ts-routing';
 import { ADTType } from '@morphic-ts/adt';
 
-const {
+export const {
   parse,
   format,
   adt: ParseableLocation
@@ -17,17 +17,32 @@ const {
 type ParseableLocation = ADTType<typeof ParseableLocation>
 
 const Location = ParseableLocation.exclude(['NotFound'])
-type Location = ADTType<typeof Location>
+export type Location = ADTType<typeof Location>
 
 const TopicLocation = Location.select([
   'Topics', 'TopicsID',
 ]);
 type TopicLocation = ADTType<typeof TopicLocation>
 
-const topicFromLocation = TopicLocation.match({
-  Topics: () => <h3>Please select a topic.</h3>,
-  TopicsID: (l) => <Topic topicId={l.value.id} />
-});
+const Link = ({
+  to,
+  updateLocation,
+  children,
+}: {
+  to: Location;
+  updateLocation: (to: Location) => void;
+  children: string;
+}) => (
+  <a
+    href={format(to)}
+    onClick={(event) => {
+      event.preventDefault();
+      updateLocation(to);
+    }}
+  >
+    {children}
+  </a>
+);
 
 const App = () => {
   const [location, setLocation] = useState<ParseableLocation>(parse(window.location.pathname));
@@ -42,31 +57,28 @@ const App = () => {
     <div>
       <ul>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.Home({ value: {} })
-            )}
+          <Link
+            to={Location.of.Home({ value: {} })}
+            updateLocation={updateLocation}
           >
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.About({ value: {} })
-            )}
+          <Link
+            to={Location.of.About({ value: {} })}
+            updateLocation={updateLocation}
           >
             About
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.Topics({ value: {} })
-            )}
+          <Link
+            to={Location.of.Topics({ value: {} })}
+            updateLocation={updateLocation}
           >
             Topics
-          </a>
+          </Link>
         </li>
       </ul>
       {ParseableLocation.matchStrict<JSX.Element>({
@@ -74,11 +86,11 @@ const App = () => {
         About: () => <About />,
         Topics: (l) => <Topics
           location={l}
-          setLocation={setLocation}
+          updateLocation={updateLocation}
         />,
         TopicsID: (l) => <Topics
           location={l}
-          setLocation={setLocation}
+          updateLocation={updateLocation}
         />,
         NotFound: () => <div />,
       })(location)}
@@ -96,35 +108,36 @@ function About() {
 
 function Topics({
   location,
-  setLocation,
+  updateLocation,
 }: {
   location: TopicLocation,
-  setLocation: (l: Location) => void,
+  updateLocation: (l: Location) => void,
 }) {
   return (
     <div>
       <h2>Topics</h2>
       <ul>
         <li>
-          <a
-            onClick={() => setLocation(
-              TopicLocation.of.TopicsID({ value: { id: 'components' } })
-            )}
+          <Link
+            to={TopicLocation.of.TopicsID({ value: { id: 'components' } })}
+            updateLocation={updateLocation}
           >
             Components
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            onClick={() => setLocation(
-              TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })
-            )}
+          <Link
+            to={TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })}
+            updateLocation={updateLocation}
           >
             Props v. State
-          </a>
+          </Link>
         </li>
       </ul>
-      {topicFromLocation(location)}
+      {TopicLocation.match({
+        Topics: () => <h3>Please select a topic.</h3>,
+        TopicsID: (l) => <Topic topicId={l.value.id} />
+      })(location)}
     </div>
   );
 }

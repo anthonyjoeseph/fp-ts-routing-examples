@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { end, lit, str, } from 'fp-ts-routing';
 import { routingFromMatches4 } from 'morphic-ts-routing';
 import { ADTType } from '@morphic-ts/adt';
+import FormattedLink from '../3-full-example/FormattedLink';
 
 const {
   parse,
@@ -21,11 +22,6 @@ const TopicLocation = Location.select([
 ]);
 type TopicLocation = ADTType<typeof TopicLocation>
 
-const topicFromLocation = TopicLocation.match({
-  Topics: () => <h3>Please select a topic.</h3>,
-  TopicsID: (l) => <Topic topicId={l.value.id} />
-});
-
 const App = () => {
   const [location, setLocation] = useState<Location>(parse(window.location.pathname));
   const updateLocation = (newLocation: Location) => {
@@ -39,31 +35,28 @@ const App = () => {
     <div>
       <ul>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.Home({ value: {} })
-            )}
+          <FormattedLink
+            to={Location.of.Home({ value: {} })}
+            updateLocation={updateLocation}
           >
             Home
-          </a>
+          </FormattedLink>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.About({ value: {} })
-            )}
+          <FormattedLink
+            to={Location.of.About({ value: {} })}
+            updateLocation={updateLocation}
           >
             About
-          </a>
+          </FormattedLink>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation(
-              Location.of.Topics({ value: {} })
-            )}
+          <FormattedLink
+            to={Location.of.Topics({ value: {} })}
+            updateLocation={updateLocation}
           >
             Topics
-          </a>
+          </FormattedLink>
         </li>
       </ul>
       {Location.matchStrict<JSX.Element>({
@@ -71,11 +64,11 @@ const App = () => {
         About: () => <About />,
         Topics: (l) => <Topics
           location={l}
-          setLocation={setLocation}
+          updateLocation={updateLocation}
         />,
         TopicsID: (l) => <Topics
           location={l}
-          setLocation={setLocation}
+          updateLocation={updateLocation}
         />,
         NotFound: () => <div />,
       })(location)}
@@ -93,35 +86,36 @@ function About() {
 
 function Topics({
   location,
-  setLocation,
+  updateLocation,
 }: {
   location: TopicLocation,
-  setLocation: (l: Location) => void,
+  updateLocation: (l: Location) => void,
 }) {
   return (
     <div>
       <h2>Topics</h2>
       <ul>
         <li>
-          <a
-            onClick={() => setLocation(
-              TopicLocation.of.TopicsID({ value: { id: 'components' } })
-            )}
+          <FormattedLink
+            to={TopicLocation.of.TopicsID({ value: { id: 'components' } })}
+            updateLocation={updateLocation}
           >
             Components
-          </a>
+          </FormattedLink>
         </li>
         <li>
-          <a
-            onClick={() => setLocation(
-              TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })
-            )}
+          <FormattedLink
+            to={TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })}
+            updateLocation={updateLocation}
           >
             Props v. State
-          </a>
+          </FormattedLink>
         </li>
       </ul>
-      {topicFromLocation(location)}
+      {TopicLocation.match({
+        Topics: () => <h3>Please select a topic.</h3>,
+        TopicsID: (l) => <Topic topicId={l.value.id} />
+      })(location)}
     </div>
   );
 }

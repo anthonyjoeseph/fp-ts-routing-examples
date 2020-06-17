@@ -1,21 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {  useState } from 'react';
-
-const Link = ({
-  to,
-  children,
-}: {
-  to: string;
-  children: string;
-}) => (
-  <a
-    onClick={() => {
-      window.history.pushState(null, '', '/about');
-    }}
-  >
-    {children}
-  </a>
-);
+import Link from '../../common/Link';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -49,25 +33,28 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <a
-              onClick={() => updateLocation('/')}
+            <Link
+              to="/"
+              updateLocation={updateLocation}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateLocation('/about')}
+            <Link
+              to="/about"
+              updateLocation={updateLocation}
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => updateLocation('/users')}
+            <Link
+              to="/users"
+              updateLocation={updateLocation}
             >
               Users
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

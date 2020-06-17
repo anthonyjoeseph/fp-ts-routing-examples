@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { end, lit, str, Route, parse, format } from 'fp-ts-routing';
 import React, { useState } from 'react';
+import FormattedLink from './FormattedLink';
 
 interface Home {
   readonly type: 'Home'
@@ -23,7 +23,7 @@ interface NotFound {
   readonly type: 'NotFound'
 }
 
-type Location = Home | About | Topics
+export type Location = Home | About | Topics
 | TopicsID | NotFound
 
 type TopicLocation = Topics | TopicsID
@@ -51,12 +51,12 @@ const router = /*zero<Location>().alt*/home.parser.map<Location>(
     id,
   })))
 
-const parser = (s: string): Location => parse(
+export const parser = (s: string): Location => parse(
   router,
   Route.parse(s),
   { type: 'NotFound' },
 )
-const formatter = (l: Location): string => {
+export const formatter = (l: Location): string => {
   switch (l.type) {
     case 'Home':
       return format(home.formatter, l);
@@ -74,7 +74,7 @@ const formatter = (l: Location): string => {
 
 const componentFromLocation = (
   location: Location,
-  setLocation: (l: Location) => void,
+  updateLocation: (l: Location) => void,
 ): JSX.Element => {
   switch (location.type) {
     case 'Home':
@@ -84,12 +84,12 @@ const componentFromLocation = (
     case 'Topics':
       return  <Topics
         location={location}
-        setLocation={setLocation}
+        updateLocation={updateLocation}
       />;
     case 'TopicsID':
       return <Topics
         location={location}
-        setLocation={setLocation}
+        updateLocation={updateLocation}
       />;
     case 'NotFound':
       return <div />
@@ -118,31 +118,34 @@ const App = () => {
     <div>
       <ul>
         <li>
-          <a
-            onClick={() => updateLocation({
+          <FormattedLink
+            to={{
               type: 'Home'
-            })}
+            }}
+            updateLocation={updateLocation}
           >
             Home
-          </a>
+          </FormattedLink>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation({
+          <FormattedLink
+            to={{
               type: 'About',
-            })}
+            }}
+            updateLocation={updateLocation}
           >
             About
-          </a>
+          </FormattedLink>
         </li>
         <li>
-          <a
-            onClick={() => updateLocation({
+          <FormattedLink
+            to={{
               type: 'Topics',
-            })}
+            }}
+            updateLocation={updateLocation}
           >
             Users
-          </a>
+          </FormattedLink>
         </li>
       </ul>
       {componentFromLocation(location, setLocation)}
@@ -160,28 +163,30 @@ function About() {
 
 function Topics({
   location,
-  setLocation,
+  updateLocation,
 }: {
   location: TopicLocation,
-  setLocation: (l: Location) => void,
+  updateLocation: (l: Location) => void,
 }) {
   return (
     <div>
       <h2>Topics</h2>
       <ul>
         <li>
-          <a
-            onClick={() => setLocation({ type: 'TopicsID', id: 'components' })}
+          <FormattedLink
+            to={{ type: 'TopicsID', id: 'components' }}
+            updateLocation={updateLocation}
           >
             Components
-          </a>
+          </FormattedLink>
         </li>
         <li>
-          <a
-            onClick={() => setLocation({ type: 'TopicsID', id: 'props-v-state' })}
+          <FormattedLink
+            to={{ type: 'TopicsID', id: 'props-v-state' }}
+            updateLocation={updateLocation}
           >
             Props v. State
-          </a>
+          </FormattedLink>
         </li>
       </ul>
       {topicFromLocation(location)}
