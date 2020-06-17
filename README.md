@@ -1,5 +1,5 @@
 
-# Cirriculum
+# Examples
   1. React Router
       1. MDN & Browser window API
           1. React Router
