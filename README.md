@@ -1,7 +1,7 @@
 
 # Examples
   1. React Router
-      1. MDN & Browser window API
+      1. Location & History APIs
           1. React Router
           2. Router from Scratch
           3. Clobbered State
