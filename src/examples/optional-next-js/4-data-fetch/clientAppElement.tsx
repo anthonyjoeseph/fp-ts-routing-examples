@@ -4,7 +4,7 @@ import App from './App';
 const clientAppElement = (): React.ReactElement => (
   <App
     initialUrl={window.location.pathname}
-    prefetched=""
+    fetched=""
   />
 );
 

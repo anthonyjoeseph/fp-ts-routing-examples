@@ -11,15 +11,14 @@ const handleRoute = async (
   res: Response<string>,
 ) => {
   try {
-    const prefetched = await fetch('https://reqres.in/api/users?page=2')
+    const fetched = await fetch('https://reqres.in/api/users?page=2')
       .then(resp => resp.text())
       .then(text => `fetched: ${text}`);
     const clientString = await generateClient(
       <App
         initialUrl={req.url}
-        prefetched={prefetched}
       />,
-      undefined
+      fetched
     )
     return res.send(clientString);
   } catch (untypedErr) {

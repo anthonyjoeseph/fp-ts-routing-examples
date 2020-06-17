@@ -7,7 +7,7 @@ const App = ({
 }: {
   initialUrl: string;
 }) => {
-  const prefetched = window.__INITIAL__DATA__
+  const fetched = window.__INITIAL__DATA__
   const [counter, setCounter] = useState(0);
   const [url, setUrl] = useState(initialUrl);
   const updateUrl = (newLocation: string) => {
@@ -34,7 +34,7 @@ const App = ({
   }
   return (
     <div>
-      {prefetched}
+      {fetched}
       <button
         onClick={() => setCounter(counter + 1)}
       >

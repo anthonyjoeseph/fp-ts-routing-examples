@@ -27,10 +27,11 @@
           5. Bonus: smart constructor
           6. Bonus: other sum type libraries
   - (Optional) Next.js & SSR
-      1. Overview - Express + ReactDOM
-      2. Async
-      3. Routing
-      4. Bonus: prefetch
+      1. Router
+      2. Removing flicker
+      3. Hyradtion-safe URL
+      4. Data fetch
+      5. Hydration-safe Data Fetch
   2. Data Model
       1. TodoMVC
       2. react-testing-library

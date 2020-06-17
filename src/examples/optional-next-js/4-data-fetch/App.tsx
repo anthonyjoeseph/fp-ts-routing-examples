@@ -4,10 +4,10 @@ import window from '../1-router/NodeSafeWindow';
 
 const App = ({
   initialUrl,
-  prefetched,
+  fetched,
 }: {
   initialUrl: string;
-  prefetched: string;
+  fetched: string;
 }) => {
   const [counter, setCounter] = useState(0);
   const [url, setUrl] = useState(initialUrl);
@@ -35,7 +35,7 @@ const App = ({
   }
   return (
     <div>
-      {prefetched}
+      {fetched}
       <button
         onClick={() => setCounter(counter + 1)}
       >
