@@ -19,7 +19,7 @@ let store = createStore(
       ...defaultAppState,
       visibilityFilter: routeToVisibilityFilter(
         parse(
-          window.location.href
+          window.location.pathname
         )
       ),
     },
@@ -35,7 +35,7 @@ epicMiddleware.run(
   epic(
     url => window.history.pushState(null, '', url),
     r.fromEvent(window, 'popstate'),
-    () => window.location.href,
+    () => window.location.pathname,
   )
 );
 

@@ -1,18 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {  useState } from 'react';
-
-type url = '/' | '/about' | '/users' | 'not-found'
+import React, { useState } from 'react';
+import window from './NodeSafeWindow';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [url, setUrl] = useState<url>(window.location.pathname as url);
-  const updateUrl = (newurl: url) => {
-    setUrl(newurl);
-    window.history.pushState(null, '', newurl);
+  const [url, setUrl] = useState(window.location.pathname);
+  const updateUrl = (newLocation: string) => {
+    setUrl(newLocation);
+    window.history.pushState(null, '', newLocation);
   }
-  window.onpopstate = () => {
-    setUrl(window.location.pathname as url);
-  }
+  window.addEventListener('popstate', () => {
+    setUrl(window.location.pathname);
+  })
   let innerComponent: JSX.Element;
   switch (url) {
     case '/':
@@ -24,12 +23,9 @@ const App = () => {
     case '/users':
       innerComponent =  <Users />;
       break;
-    case 'not-found':
-      innerComponent= <div />;
+    default:
+      innerComponent = <div />;
       break;
-    /* case 'somethingelse':
-      innerComponent = <Home />
-      break; */
   }
   return (
     <div>

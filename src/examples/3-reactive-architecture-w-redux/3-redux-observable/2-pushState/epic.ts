@@ -17,7 +17,7 @@ const epic: Epic<AppAction, AppAction, AppState> = (
   pipe(
     r.fromEvent(window, 'popstate'),
     ro.map(() => pipe(
-      window.location.href,
+      window.location.pathname,
       parse,
       routeToVisibilityFilter
     )),

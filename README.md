@@ -68,6 +68,4 @@ You can run the code in this repository by pointing the `App` component import i
 
 [Express SSR addition to create-react-app](https://gist.github.com/anthonyjoeseph/bdcf9be5cfc515cad334b687237c1556)
 
-(TODO) Add [css & svg to webpack](https://dev.to/achhapolia10/adding-style-to-server-side-rendering-and-automating-the-build-process-59l) and [ts-loader](https://stackoverflow.com/questions/33915930/using-file-loader-with-es6-modules-and-typescript-in-webpack) to allow actual create-react-app to work
-
 ### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -22,13 +22,13 @@ const componentFromLocation = (
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [location, setLocation] = useState<Location>(window.location.href as Location);
+  const [location, setLocation] = useState<Location>(window.location.pathname as Location);
   const updateLocation = (newLocation: Location) => {
     setLocation(newLocation);
     window.history.pushState(null, '', newLocation);
   }
   window.onpopstate = () => {
-    setLocation(window.location.href as Location);
+    setLocation(window.location.pathname as Location);
   }
   const innerComponent: JSX.Element = componentFromLocation(location);
   return (

@@ -19,7 +19,7 @@ const ReduxApp = () => {
       AppAction.of.SET_VISIBILITY_FILTER({
         filter: routeToVisibilityFilter(
           parse(
-            window.location.href,
+            window.location.pathname,
           )
         ),
       })

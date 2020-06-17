@@ -3,7 +3,7 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [location, setLocation] = useState(window.location.href);
+  const [location, setLocation] = useState(window.location.pathname);
   const updateLocation = (newLocation: string) => {
     setLocation(newLocation);
     window.history.pushState(null, '', newLocation);

@@ -10,7 +10,7 @@ const epic: Epic<AppAction, AppAction, AppState> = () => pipe(
   r.fromEvent(window, 'popstate'),
   ro.map(() => AppAction.of.SET_VISIBILITY_FILTER({
     filter: pipe(
-      window.location.href,
+      window.location.pathname,
       parse,
       routeToVisibilityFilter
     ),

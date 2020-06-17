@@ -3,7 +3,7 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const url = window.location.href;
+  const url = window.location.pathname;
   let innerComponent: JSX.Element;
   switch (url) {
     case '/':
@@ -31,7 +31,7 @@ const App = () => {
           <li>
             <a
               onClick={() => {
-                window.location.href = '/'
+                window.location.pathname = '/'
               }}
             >
               Home
@@ -40,7 +40,7 @@ const App = () => {
           <li>
             <a
               onClick={() => {
-                window.location.href = '/about'
+                window.location.pathname = '/about'
               }}
             >
               About
@@ -49,7 +49,7 @@ const App = () => {
           <li>
             <a
               onClick={() => {
-                window.location.href = '/users'
+                window.location.pathname = '/users'
               }}
             >
               Users

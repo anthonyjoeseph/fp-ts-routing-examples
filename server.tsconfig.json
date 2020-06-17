@@ -24,6 +24,7 @@
     "sourceMap": true
   },
   "include": [
-    "server"
+    "server",
+    "src/react-app-env.d.ts"
   ]
 }

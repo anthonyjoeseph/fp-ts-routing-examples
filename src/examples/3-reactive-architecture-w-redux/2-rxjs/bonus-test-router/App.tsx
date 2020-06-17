@@ -16,7 +16,7 @@ let store = createStore(
       ...defaultAppState,
       visibilityFilter: routeToVisibilityFilter(
         parse(
-          window.location.href
+          window.location.pathname
         )
       ),
     },

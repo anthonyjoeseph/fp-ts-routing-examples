@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => {
-  const url = window.location.href;
+  const url = window.location.pathname;
   let innerComponent: JSX.Element;
   switch (url) {
     case '/':

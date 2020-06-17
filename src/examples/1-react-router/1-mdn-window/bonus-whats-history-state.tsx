@@ -3,7 +3,7 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [url, setUrl] = useState(window.location.href);
+  const [url, setUrl] = useState(window.location.pathname);
   const updateUrl = (newurl: string) => {
     setUrl(newurl);
     window.history.pushState(counter, '', newurl);
@@ -11,7 +11,7 @@ const App = () => {
   }
   window.onpopstate = (ev: PopStateEvent) => {
     setCounter(ev.state as number)
-    setUrl(window.location.href);
+    setUrl(window.location.pathname);
   }
   let innerComponent: JSX.Element;
   switch (url) {

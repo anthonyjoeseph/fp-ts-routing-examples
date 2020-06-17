@@ -14,7 +14,7 @@ const MockableApp = ({
   const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>(
     routeToVisibilityFilter(
       parse(
-        window.location.href
+        window.location.pathname
       )
     ),
   );
@@ -22,7 +22,7 @@ const MockableApp = ({
     setVisibilityFilter(
       routeToVisibilityFilter(
         parse(
-          window.location.href,
+          window.location.pathname,
         )
       )
     )

@@ -2,7 +2,7 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const url = window.location.href;
+  const url = window.location.pathname;
   let innerComponent: JSX.Element;
   switch (url) {
     case '/':

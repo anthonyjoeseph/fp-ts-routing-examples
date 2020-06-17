@@ -7,20 +7,28 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
+      "name": "Debug Create React App",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}"
     },
     {
-      "name": "Debug CRA Tests",
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug SSR Client",
+      "url": "http://localhost:3006",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true
+    },
+    {
+      "name": "Debug SSR Server",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-scripts",
-      "args": ["test", "--runInBand", "--no-cache", "--env=jsdom"],
       "cwd": "${workspaceRoot}",
-      "protocol": "inspector",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
+      "program": "${workspaceRoot}/server/server.tsx",
+      "outFiles": [
+        "${workspaceRoot}/server-build/**/*.js"
+      ],
+      "sourceMaps": true
     }
   ]
 }

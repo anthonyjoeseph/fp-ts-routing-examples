@@ -110,13 +110,13 @@ const topicFromLocation = (location: TopicLocation): JSX.Element => {
 };
 
 const App = () => {
-  const [location, setLocation] = useState<Location>(parse(window.location.href));
+  const [location, setLocation] = useState<Location>(parse(window.location.pathname));
   const updateLocation = (newLocation: Location) => {
     setLocation(newLocation);
     window.history.pushState(null, '', format(newLocation));
   }
   window.onpopstate = () => {
-    setLocation(parse(window.location.href));
+    setLocation(parse(window.location.pathname));
   }
   return (
     <div>

@@ -2,7 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 const serverConfig = {
-  entry: './server/server.ts',
+  entry: './server/server.tsx',
 
   target: 'node',
 
@@ -27,6 +27,21 @@ const serverConfig = {
           allowTsInNodeModules: true,
           configFile: 'server.tsconfig.json'
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ['css-loader'],
+      },
+      {
+        test: /\.(jpg|jpeg|png|svg|gif)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+              name: '[md5:hash:hex].[ext]',
+              publicPath: '/server-build/img',
+              outputPath: 'img',
+          }
+      }]
       }
     ]
   },
@@ -34,12 +49,12 @@ const serverConfig = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [ '.tsx', '.ts', '.js', '.css', '.svg', '.png' ],
   },
 };
 
 const clientConfig = {
-  entry: './server/hydrate.ts',
+  entry: './server/hydrate.tsx',
 
   target: 'web',
 
@@ -55,13 +70,28 @@ const clientConfig = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
         options: {
           allowTsInNodeModules: true,
           configFile: 'server.tsconfig.json'
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(jpg|jpeg|png|svg|gif)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+              name: '[md5:hash:hex].[ext]',
+              publicPath: '/server-build/img',
+              outputPath: 'img',
+          }
+        }]
       }
     ]
   },
@@ -69,7 +99,7 @@ const clientConfig = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [ '.tsx', '.ts', '.js', '.css', '.svg', '.png' ],
   },
 };
 
