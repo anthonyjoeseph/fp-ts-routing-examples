@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../1-simple-todo/App';
 import { defaultTodos } from '../1-simple-todo/AppState';
 
@@ -18,69 +19,69 @@ describe('Todo App', () => {
 
   it('Has default todos', () => {
     defaultTodos.forEach(t => {
-      const todoElement = screen.getByLabelText(`todo: ${t.text}`);
+      const todoElement = screen.getByRole('listitem', { name: `todo: ${t.text}` });
       expect(todoElement).toBeInTheDocument();
     });
   });
-  it('Can add todo', () => {
-    const newTodoTextElem = screen.getByLabelText(/New Todo Text/i);
-    fireEvent.change(newTodoTextElem, { target: { value: newTodoText } });
+  it('Can add todo', async () => {
+    const newTodoTextElem = screen.getByRole('textbox', { name: /New Todo Text/i });
+    await userEvent.type(newTodoTextElem, newTodoText);
     
-    const addTodoButtonElem = screen.getByLabelText(/Add Todo/i);
-    fireEvent.click(addTodoButtonElem);
+    const addTodoButtonElem = screen.getByRole('button', { name: /Add Todo/i });
+    userEvent.click(addTodoButtonElem);
 
-    const newTodoElement = screen.getByLabelText(`todo: ${newTodoText}`);
+    const newTodoElement = screen.getByRole('listitem', { name: `todo: ${newTodoText}` });
     expect(newTodoElement).toBeInTheDocument();
   });
   it('Can complete/uncomplete todo', () => {
-    const todoElement = screen.getByLabelText(`todo: ${defaultTodos[0].text}`);
+    const todoElement = screen.getByRole('listitem', { name: `todo: ${defaultTodos[0].text}` });
+
     expect(todoElement).toBeInTheDocument();
 
     const styleBeforeClick = window.getComputedStyle(todoElement);
     expect(styleBeforeClick.textDecoration).toMatch(/none/i);
 
-    fireEvent.click(todoElement);
+    userEvent.click(todoElement);
 
     const styleAfterClick = window.getComputedStyle(todoElement);
     expect(styleAfterClick.textDecoration).toMatch(/line-through/i);
 
-    fireEvent.click(todoElement);
+    userEvent.click(todoElement);
 
     const styleAfterReset = window.getComputedStyle(todoElement);
     expect(styleAfterReset.textDecoration).toMatch(/none/i);
   });
   it('Can display all/active/completed todos', () => {
-    const firstTodoElement = screen.getByLabelText(`todo: ${defaultTodos[0].text}`);
+    const firstTodoElement = screen.getByRole('listitem', { name: `todo: ${defaultTodos[0].text}` });
     expect(firstTodoElement).toBeInTheDocument();
-    fireEvent.click(firstTodoElement);
+    userEvent.click(firstTodoElement);
 
     const hasElement = (index: number, has: boolean) => {
-      const elem = screen.queryByLabelText(`todo: ${defaultTodos[index].text}`);
+      const elem = screen.queryByRole('listitem', { name: `todo: ${defaultTodos[index].text}` });
       if (has) {
         expect(elem).toBeInTheDocument();
       } else {
         expect(elem).not.toBeInTheDocument();
       }
     }
-
-    const showCompletedTodos = screen.getByText(/Completed/i);
+    const showCompletedTodos = screen.getByRole('button', { name: /Completed/i });
     expect(showCompletedTodos).toBeInTheDocument();
-    const showActiveTodos = screen.getByText(/Active/i);
+    const showActiveTodos = screen.getByRole('button', { name: /Active/i });
     expect(showActiveTodos).toBeInTheDocument();
-    const showAllTodos = screen.getByText(/All/i);
+    const showAllTodos = screen.getByRole('button', { name: /All/i });
     expect(showAllTodos).toBeInTheDocument();
 
-    fireEvent.click(showActiveTodos);
+    userEvent.click(showActiveTodos);
 
     hasElement(0, false);
     hasElement(1, true);
 
-    fireEvent.click(showCompletedTodos);
+    userEvent.click(showCompletedTodos);
 
     hasElement(0, true);
     hasElement(1, false);
 
-    fireEvent.click(showAllTodos);
+    userEvent.click(showAllTodos);
 
     hasElement(0, true);
     hasElement(1, true);

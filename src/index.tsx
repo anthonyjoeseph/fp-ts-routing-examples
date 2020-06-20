@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './examples/3-reactive-architecture-w-redux/3-redux-observable/3-test/1-pushState/App';
+import App from './examples/1-react-router/4-morphic-ts-adt/3-full-example/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

@@ -19,7 +19,7 @@
           1. Parser
           2. Full Example
           3. Bonus: Ints, Queries and Types
-      4. morphic-ts
+      4. @morphic-ts/adt
           1. makeADT, of
           2. morphic-ts-routing
           3. full example
