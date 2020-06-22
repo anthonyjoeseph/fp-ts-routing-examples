@@ -2,7 +2,7 @@ import { ADTType, makeADT, ofType } from '@morphic-ts/adt';
 import { end, lit, str, } from 'fp-ts-routing';
 import { routingFromMatches4 } from 'morphic-ts-routing';
 import React, { useState } from 'react';
-import FormattedLink from './FormattedLink';
+import LocationLink from './LocationLink';
 
 export const {
   parse,
@@ -35,28 +35,28 @@ const App = () => {
     <div>
       <ul>
         <li>
-          <FormattedLink
+          <LocationLink
             to={Location.of.Home({ value: {} })}
             updateLocation={updateLocation}
           >
             Home
-          </FormattedLink>
+          </LocationLink>
         </li>
         <li>
-          <FormattedLink
+          <LocationLink
             to={Location.of.About({ value: {} })}
             updateLocation={updateLocation}
           >
             About
-          </FormattedLink>
+          </LocationLink>
         </li>
         <li>
-          <FormattedLink
+          <LocationLink
             to={Location.of.Topics({ value: {} })}
             updateLocation={updateLocation}
           >
             Topics
-          </FormattedLink>
+          </LocationLink>
         </li>
       </ul>
       {Location.matchStrict<JSX.Element>({
@@ -96,20 +96,20 @@ function Topics({
       <h2>Topics</h2>
       <ul>
         <li>
-          <FormattedLink
+          <LocationLink
             to={TopicLocation.of.TopicsID({ value: { id: 'components' } })}
             updateLocation={updateLocation}
           >
             Components
-          </FormattedLink>
+          </LocationLink>
         </li>
         <li>
-          <FormattedLink
+          <LocationLink
             to={TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })}
             updateLocation={updateLocation}
           >
             Props v. State
-          </FormattedLink>
+          </LocationLink>
         </li>
       </ul>
       {TopicLocation.match({

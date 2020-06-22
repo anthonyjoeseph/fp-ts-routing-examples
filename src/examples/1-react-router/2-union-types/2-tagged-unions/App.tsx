@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FormattedLink from './FormattedLink';
+import LocationLink from './LocationLink';
 
 interface Home {
   readonly type: 'Home'
@@ -123,34 +123,34 @@ const App = () => {
     <div>
       <ul>
         <li>
-          <FormattedLink
+          <LocationLink
             to={{
               type: 'Home'
             }}
             updateLocation={updateLocation}
           >
             Home
-          </FormattedLink>
+          </LocationLink>
         </li>
         <li>
-          <FormattedLink
+          <LocationLink
             to={{
               type: 'About',
             }}
             updateLocation={updateLocation}
           >
             About
-          </FormattedLink>
+          </LocationLink>
         </li>
         <li>
-          <FormattedLink
+          <LocationLink
             to={{
               type: 'Topics',
             }}
             updateLocation={updateLocation}
           >
             Users
-          </FormattedLink>
+          </LocationLink>
         </li>
       </ul>
       {componentFromLocation(location, setLocation)}
@@ -178,20 +178,20 @@ function Topics({
       <h2>Topics</h2>
       <ul>
         <li>
-          <FormattedLink
+          <LocationLink
             to={{ type: 'TopicsID', id: 'components' }}
             updateLocation={updateLocation}
           >
             Components
-          </FormattedLink>
+          </LocationLink>
         </li>
         <li>
-          <FormattedLink
+          <LocationLink
             to={{ type: 'TopicsID', id: 'props-v-state' }}
             updateLocation={updateLocation}
           >
             Props v. State
-          </FormattedLink>
+          </LocationLink>
         </li>
       </ul>
       {topicFromLocation(location)}

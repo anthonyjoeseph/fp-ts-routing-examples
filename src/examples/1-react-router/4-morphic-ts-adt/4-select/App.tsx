@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { end, lit, str, } from 'fp-ts-routing';
 import { routingFromMatches4 } from 'morphic-ts-routing';
 import { ADTType } from '@morphic-ts/adt';
-import FormattedLink from '../3-full-example/FormattedLink';
+import FormattedLink from '../3-full-example/LocationLink';
 
 const {
   parse,

@@ -1,17 +1,17 @@
 import React, {  useState } from 'react';
-import Link from '../../common/Link';
+import PathnameLink from './PathnameLink';
 
-type url = '/' | '/about' | '/users'
+export type Pathname = '/' | '/about' | '/users'
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [pathname, setPathname] = useState<url>(window.location.pathname as url);
-  const updatePathname = (newurl: url) => {
+  const [pathname, setPathname] = useState<Pathname>(window.location.pathname as Pathname);
+  const updatePathname = (newurl: Pathname) => {
     setPathname(newurl);
     window.history.pushState(null, '', newurl);
   }
   window.addEventListener('popstate', () => {
-    setPathname(window.location.pathname as url);
+    setPathname(window.location.pathname as Pathname);
   });
   let innerComponent: JSX.Element;
   switch (pathname) {
@@ -40,28 +40,28 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <Link
+            <PathnameLink
               to="/"
-              updateLocation={location => updatePathname(location as url)}
+              updateLocation={updatePathname}
             >
               Home
-            </Link>
+            </PathnameLink>
           </li>
           <li>
-            <Link
+            <PathnameLink
               to="/about"
-              updateLocation={location => updatePathname(location as url)}
+              updateLocation={updatePathname}
             >
               About
-            </Link>
+            </PathnameLink>
           </li>
           <li>
-            <Link
+            <PathnameLink
               to="/users"
-              updateLocation={location => updatePathname(location as url)}
+              updateLocation={updatePathname}
             >
               Users
-            </Link>
+            </PathnameLink>
           </li>
         </ul>
       </nav>

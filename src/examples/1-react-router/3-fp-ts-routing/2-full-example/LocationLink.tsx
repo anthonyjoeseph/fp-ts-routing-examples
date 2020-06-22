@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '../../common/Link';
 import { Location, parser, formatter } from './App';
 
-const FormattedLink = ({
+const LocationLink = ({
   to,
   updateLocation,
   children,
@@ -16,4 +16,4 @@ const FormattedLink = ({
   children={children}
 />;
 
-export default FormattedLink;
+export default LocationLink;
