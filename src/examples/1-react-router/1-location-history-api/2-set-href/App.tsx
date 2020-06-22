@@ -1,5 +1,5 @@
-import React, {  useState } from 'react';
-import Link from '../../common/Link';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -19,9 +19,6 @@ const App = () => {
       innerComponent = <Home />;
       break;
   }
-  const updateLocation = (url: string) => {
-    window.location.pathname = url;
-  }
   return (
     <div>
       <button
@@ -32,28 +29,19 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <Link
-              to="/"
-              updateLocation={updateLocation}
-            >
-              Home
-            </Link>
+            <a href='/'>Home</a>
           </li>
           <li>
-            <Link
-              to="/about"
-              updateLocation={updateLocation}
+            <a
+              onClick={() => {
+                window.location.pathname = '/about';
+              }}
             >
               About
-            </Link>
+            </a>
           </li>
           <li>
-            <Link
-              to="/users"
-              updateLocation={updateLocation}
-            >
-              Users
-            </Link>
+            <a href='/users'>Users</a>
           </li>
         </ul>
       </nav>
