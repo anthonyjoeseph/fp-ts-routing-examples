@@ -4,7 +4,7 @@ import Link from '../../common/Link';
 const App = () => {
   const [counter, setCounter] = useState(0);
   const [pathname, setPathname] = useState(window.location.pathname);
-  const updateLocation = (newLocation: string) => {
+  const updatePathname = (newLocation: string) => {
     setPathname(newLocation);
     window.history.pushState(null, '', newLocation);
   }
@@ -38,7 +38,7 @@ const App = () => {
           <li>
             <Link
               to="/"
-              updateLocation={updateLocation}
+              updateLocation={updatePathname}
             >
               Home
             </Link>
@@ -46,7 +46,7 @@ const App = () => {
           <li>
             <Link
               to="/about"
-              updateLocation={updateLocation}
+              updateLocation={updatePathname}
             >
               About
             </Link>
@@ -54,7 +54,7 @@ const App = () => {
           <li>
             <Link
               to="/users"
-              updateLocation={updateLocation}
+              updateLocation={updatePathname}
             >
               Users
             </Link>
