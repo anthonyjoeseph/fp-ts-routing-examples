@@ -24,6 +24,7 @@ const App = () => {
       <button
         onClick={() => setCounter(counter + 1)}
       >
+        
         inc: {counter}
       </button>
       <nav>
