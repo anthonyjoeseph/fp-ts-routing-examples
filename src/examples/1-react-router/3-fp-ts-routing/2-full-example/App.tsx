@@ -111,9 +111,9 @@ const App = () => {
     setLocation(newLocation);
     window.history.pushState(null, '', formatter(newLocation));
   }
-  window.onpopstate = () => {
+  window.addEventListener('popstate', () => {
     setLocation(parser(window.location.pathname));
-  }
+  });
   return (
     <div>
       <ul>

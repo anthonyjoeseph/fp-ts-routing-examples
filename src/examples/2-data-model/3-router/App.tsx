@@ -26,7 +26,7 @@ const App = () => {
       window.location.pathname
     )
   );
-  window.onpopstate = () => {
+  window.addEventListener('popstate', () => {
     const newLocation = parse(window.location.pathname)
     setLocation(
       newLocation
@@ -36,7 +36,7 @@ const App = () => {
         newLocation,
       )
     );
-  }
+  });
   const updateVisibilityFilter = (newVisibility: VisibilityFilter) => {
     let newRoute: Location;
     switch (newVisibility) {

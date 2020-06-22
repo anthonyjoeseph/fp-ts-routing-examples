@@ -18,7 +18,7 @@ const MockableApp = ({
       )
     ),
   );
-  window.onpopstate = () => {
+  window.addEventListener('popstate', () => {
     setVisibilityFilter(
       routeToVisibilityFilter(
         parse(
@@ -26,7 +26,7 @@ const MockableApp = ({
         )
       )
     )
-  }
+  });
   const updateVisibilityFilter = (newVisibility: VisibilityFilter) => {
     pushUrl(
       format(

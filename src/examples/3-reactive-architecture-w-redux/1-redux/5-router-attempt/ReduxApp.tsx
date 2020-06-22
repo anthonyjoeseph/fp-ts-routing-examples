@@ -14,7 +14,7 @@ const ReduxApp = () => {
     todos,
     visibilityFilter,
   } = state;
-  window.onpopstate = () => {
+  window.addEventListener('popstate', () => {
     dispatch(
       AppAction.of.SET_VISIBILITY_FILTER({
         filter: routeToVisibilityFilter(
@@ -24,7 +24,7 @@ const ReduxApp = () => {
         ),
       })
     );
-  }
+  });
   return (
     <div>
       <AddTodo

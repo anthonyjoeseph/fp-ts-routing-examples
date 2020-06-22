@@ -14,7 +14,7 @@ const App = () => {
       )
     ),
   );
-  window.onpopstate = () => {
+  window.addEventListener('popstate', () => {
     setVisibilityFilter(
       routeToVisibilityFilter(
         parse(
@@ -22,7 +22,7 @@ const App = () => {
         )
       )
     )
-  }
+  });
   const updateVisibilityFilter = (newVisibility: VisibilityFilter) => {
     window.history.pushState(
       null,

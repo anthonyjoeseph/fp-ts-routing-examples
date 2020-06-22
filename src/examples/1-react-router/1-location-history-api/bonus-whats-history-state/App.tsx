@@ -9,10 +9,10 @@ const App = () => {
     window.history.pushState(counter, '', newurl);
     // window.history.replaceState(counter, '', newurl);
   }
-  window.onpopstate = (ev: PopStateEvent) => {
+  window.addEventListener('popstate', ev => {
     setCounter(ev.state as number)
     setPathname(window.location.pathname);
-  }
+  });
   let innerComponent: JSX.Element;
   switch (pathname) {
     case '/':

@@ -10,9 +10,9 @@ const App = () => {
     setPathname(newurl);
     window.history.pushState(null, '', newurl);
   }
-  window.onpopstate = () => {
+  window.addEventListener('popstate', () => {
     setPathname(window.location.pathname as url);
-  }
+  });
   let innerComponent: JSX.Element;
   switch (pathname) {
     case '/':
