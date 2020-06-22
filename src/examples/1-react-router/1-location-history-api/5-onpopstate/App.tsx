@@ -1,34 +1,31 @@
 import React, {  useState } from 'react';
 import Link from '../../common/Link';
 
-type Location = '/' | '/about' | '/users'
-
-const componentFromLocation = (
-  location: Location
-): JSX.Element => {
-  switch (location) {
-    case '/':
-      return <Home />;
-    case '/about':
-      return  <About />;
-    case '/users':
-      return  <Users />;
-/*  case 'somethingelse':
-      return <Home /> */
-  }
-}
-
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [location, setLocation] = useState<Location>(window.location.pathname as Location);
-  const updateLocation = (newLocation: Location) => {
-    setLocation(newLocation);
+  const [pathname, setPathname] = useState(window.location.pathname);
+  const updateLocation = (newLocation: string) => {
+    setPathname(newLocation);
     window.history.pushState(null, '', newLocation);
   }
   window.onpopstate = () => {
-    setLocation(window.location.pathname as Location);
+    setPathname(window.location.pathname);
   }
-  const innerComponent: JSX.Element = componentFromLocation(location);
+  let innerComponent: JSX.Element;
+  switch (pathname) {
+    case '/':
+      innerComponent = <Home />;
+      break;
+    case '/about':
+      innerComponent =  <About />;
+      break;
+    case '/users':
+      innerComponent =  <Users />;
+      break;
+    default:
+      innerComponent = <Home />;
+      break;
+  }
   return (
     <div>
       <button
@@ -41,7 +38,7 @@ const App = () => {
           <li>
             <Link
               to="/"
-              updateLocation={location => updateLocation(location as Location)}
+              updateLocation={updateLocation}
             >
               Home
             </Link>
@@ -49,7 +46,7 @@ const App = () => {
           <li>
             <Link
               to="/about"
-              updateLocation={location => updateLocation(location as Location)}
+              updateLocation={updateLocation}
             >
               About
             </Link>
@@ -57,7 +54,7 @@ const App = () => {
           <li>
             <Link
               to="/users"
-              updateLocation={location => updateLocation(location as Location)}
+              updateLocation={updateLocation}
             >
               Users
             </Link>

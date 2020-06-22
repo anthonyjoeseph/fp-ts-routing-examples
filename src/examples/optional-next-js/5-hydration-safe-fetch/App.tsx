@@ -9,16 +9,16 @@ const App = ({
 }) => {
   const fetched = window.__INITIAL__DATA__
   const [counter, setCounter] = useState(0);
-  const [url, setUrl] = useState(initialUrl);
+  const [pathname, setPathname] = useState(initialUrl);
   const updateLocation = (newLocation: string) => {
-    setUrl(newLocation);
+    setPathname(newLocation);
     window.history.pushState(null, '', newLocation);
   }
   window.addEventListener('popstate', () => {
-    setUrl(window.location.pathname);
+    setPathname(window.location.pathname);
   })
   let innerComponent: JSX.Element;
-  switch (url) {
+  switch (pathname) {
     case '/':
       innerComponent = <Home />;
       break;

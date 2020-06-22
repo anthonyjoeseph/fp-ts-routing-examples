@@ -2,9 +2,9 @@ import React, {  useState } from 'react';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const url = window.location.pathname;
+  const { pathname } = window.location;
   let innerComponent: JSX.Element;
-  switch (url) {
+  switch (pathname) {
     case '/':
       innerComponent = <Home />;
       break;
@@ -15,7 +15,7 @@ const App = () => {
       innerComponent =  <Users />;
       break;
     default:
-      innerComponent = <div />;
+      innerComponent = <Home />;
       break;
   }
   return (

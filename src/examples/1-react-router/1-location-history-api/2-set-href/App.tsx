@@ -3,16 +3,9 @@ import Link from '../../common/Link';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [url, setUrl] = useState(window.location.pathname);
-  const updateLocation = (newLocation: string) => {
-    setUrl(newLocation);
-    window.history.pushState(null, '', newLocation);
-  }
-  window.onpopstate = () => {
-    setUrl(window.location.pathname);
-  }
+  const { pathname } = window.location;
   let innerComponent: JSX.Element;
-  switch (url) {
+  switch (pathname) {
     case '/':
       innerComponent = <Home />;
       break;
@@ -23,8 +16,11 @@ const App = () => {
       innerComponent =  <Users />;
       break;
     default:
-      innerComponent = <div />;
+      innerComponent = <Home />;
       break;
+  }
+  const updateLocation = (url: string) => {
+    window.location.pathname = url;
   }
   return (
     <div>

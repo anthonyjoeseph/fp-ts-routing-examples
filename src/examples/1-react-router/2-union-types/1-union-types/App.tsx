@@ -5,16 +5,16 @@ type url = '/' | '/about' | '/users'
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [url, setUrl] = useState<url>(window.location.pathname as url);
-  const updateUrl = (newurl: url) => {
-    setUrl(newurl);
+  const [pathname, setPathname] = useState<url>(window.location.pathname as url);
+  const updatePathname = (newurl: url) => {
+    setPathname(newurl);
     window.history.pushState(null, '', newurl);
   }
   window.onpopstate = () => {
-    setUrl(window.location.pathname as url);
+    setPathname(window.location.pathname as url);
   }
   let innerComponent: JSX.Element;
-  switch (url) {
+  switch (pathname) {
     case '/':
       innerComponent = <Home />;
       break;
@@ -25,8 +25,10 @@ const App = () => {
       innerComponent =  <Users />;
       break;
     /* case 'somethingelse':
-      innerComponent = <Home />
+      innerComponent = <Home />;
       break; */
+    default:
+      innerComponent = <Home />;
   }
   return (
     <div>
@@ -40,7 +42,7 @@ const App = () => {
           <li>
             <Link
               to="/"
-              updateLocation={location => updateUrl(location as url)}
+              updateLocation={location => updatePathname(location as url)}
             >
               Home
             </Link>
@@ -48,7 +50,7 @@ const App = () => {
           <li>
             <Link
               to="/about"
-              updateLocation={location => updateUrl(location as url)}
+              updateLocation={location => updatePathname(location as url)}
             >
               About
             </Link>
@@ -56,7 +58,7 @@ const App = () => {
           <li>
             <Link
               to="/users"
-              updateLocation={location => updateUrl(location as url)}
+              updateLocation={location => updatePathname(location as url)}
             >
               Users
             </Link>

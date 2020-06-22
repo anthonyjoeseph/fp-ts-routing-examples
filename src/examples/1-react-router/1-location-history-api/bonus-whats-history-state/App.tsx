@@ -3,18 +3,18 @@ import Link from '../../common/Link';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [url, setUrl] = useState(window.location.pathname);
+  const [pathname, setPathname] = useState(window.location.pathname);
   const updateLocation = (newurl: string) => {
-    setUrl(newurl);
+    setPathname(newurl);
     window.history.pushState(counter, '', newurl);
     // window.history.replaceState(counter, '', newurl);
   }
   window.onpopstate = (ev: PopStateEvent) => {
     setCounter(ev.state as number)
-    setUrl(window.location.pathname);
+    setPathname(window.location.pathname);
   }
   let innerComponent: JSX.Element;
-  switch (url) {
+  switch (pathname) {
     case '/':
       innerComponent = <Home />;
       break;
@@ -25,7 +25,7 @@ const App = () => {
       innerComponent =  <Users />;
       break;
     default:
-      innerComponent = <div />;
+      innerComponent = <Home />;
       break;
   }
   return (
