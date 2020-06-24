@@ -3,17 +3,16 @@ import PathnameLink from './PathnameLink';
 
 export type Pathname = '/' | '/about' | '/users'
 
-const componentFromPathname = (pathname: Pathname): JSX.Element => {
-  switch(pathname) {
+const componentFromPathname = (
+  pathname: string
+): JSX.Element => {
+  switch(pathname as Pathname) {
     case '/':
       return <Home />;
     case '/about':
       return  <About />;
     case '/users':
       return  <Users />;
-    /* case 'somethingelse':
-      return <Home />;
-      break; */
     default:
       return <Home />;
   }
@@ -21,13 +20,13 @@ const componentFromPathname = (pathname: Pathname): JSX.Element => {
 
 export default function App() {
   const [counter, setCounter] = useState(0);
-  const [pathname, setPathname] = useState<Pathname>(window.location.pathname as Pathname);
-  const updatePathname = (newurl: Pathname) => {
+  const [pathname, setPathname] = useState<string>(window.location.pathname);
+  const updatePathname = (newurl: string) => {
     setPathname(newurl);
     window.history.pushState(null, '', newurl);
   }
   window.addEventListener('popstate', () => {
-    setPathname(window.location.pathname as Pathname);
+    setPathname(window.location.pathname);
   });
   return (
     <div>
