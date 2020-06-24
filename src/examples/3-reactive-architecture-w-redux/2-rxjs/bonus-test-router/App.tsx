@@ -33,3 +33,4 @@ const App = () => (
   </Provider>
 );
 
+export default App;
