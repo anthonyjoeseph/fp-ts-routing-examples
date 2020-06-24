@@ -25,8 +25,6 @@ interface NotFound {
 export type Location = Home | About | Topics
 | TopicsID | NotFound
 
-type TopicLocation = Topics | TopicsID
-
 export const parse = (unparsed: string): Location => {
   if (unparsed.startsWith('/topics')) {
     const remaining = unparsed.replace('/topics', '')
@@ -158,7 +156,7 @@ function Topics({
   location,
   updateLocation,
 }: {
-  location: TopicLocation,
+  location: Topics | TopicsID,
   updateLocation: (l: Location) => void,
 }) {
   let innerComponent: JSX.Element;

@@ -26,8 +26,6 @@ interface NotFound {
 export type Location = Home | About | Topics
 | TopicsID | NotFound
 
-type TopicLocation = Topics | TopicsID
-
 const home = R.end
 const about = R.lit('about').then(R.end)
 const topics = R.lit('topics').then(R.end)
@@ -154,7 +152,7 @@ function Topics({
   location,
   updateLocation,
 }: {
-  location: TopicLocation,
+  location: Topics | TopicsID,
   updateLocation: (l: Location) => void,
 }) {
   let innerComponent: JSX.Element;
