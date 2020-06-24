@@ -5,7 +5,7 @@ import TodoList from '../1-simple-todo/components/TodoList';
 import Footer from '../1-simple-todo/components/Footer';
 import { routeToVisibilityFilter, visibilityFilterToRoute, parse, format } from './Location';
 
-const App = () => {
+export default function App() {
   const [todos, setTodos] = useState<TodoType[]>(defaultTodos);
   const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>(
     routeToVisibilityFilter(
@@ -77,4 +77,3 @@ const App = () => {
   )
 }
 
-export default App;

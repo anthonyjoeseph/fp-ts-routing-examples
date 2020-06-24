@@ -4,7 +4,7 @@ import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import Footer from './components/Footer';
 
-const App = () => {
+export default function App() {
   const [todos, setTodos] = useState<TodoType[]>(defaultTodos);
   const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>('SHOW_ALL');
   return (
@@ -49,4 +49,3 @@ const App = () => {
   )
 }
 
-export default App;

@@ -1,6 +1,6 @@
 import React, {  useState } from 'react';
 
-const App = () => {
+export default function App() {
   const [counter, setCounter] = useState(0);
   const { pathname } = window.location;
   let innerComponent: JSX.Element;
@@ -55,4 +55,4 @@ function Users() {
   return <h2>Users</h2>;
 }
 
-export default App;
+

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Link from '../../1-react-router/common/Link';
 import window from './NodeSafeWindow';
 
-const App = ({
+export default function App({
   initialUrl,
 }: {
   initialUrl: string;
-}) => {
+}) {
   const fetched = window.__INITIAL__DATA__
   const [counter, setCounter] = useState(0);
   const [pathname, setPathname] = useState(initialUrl);
@@ -85,4 +85,4 @@ function Users() {
   return <h2>Users</h2>;
 }
 
-export default App;
+

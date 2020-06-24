@@ -12,7 +12,7 @@ const routeToVisibilityFilter = Location.matchStrict<VisibilityFilter>({
   NotFound: () => 'SHOW_ALL',
 })
 
-const App = () => {
+export default function App() {
   const [todos, setTodos] = useState<TodoType[]>(defaultTodos);
   const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>(
     routeToVisibilityFilter(
@@ -95,4 +95,3 @@ const App = () => {
   )
 }
 
-export default App;

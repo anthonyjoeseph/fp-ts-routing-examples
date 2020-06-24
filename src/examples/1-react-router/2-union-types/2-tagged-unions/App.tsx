@@ -109,7 +109,7 @@ const topicFromLocation = (location: TopicLocation): JSX.Element => {
   }
 };
 
-const App = () => {
+export default function App() {
   const [location, setLocation] = useState<Location>(parse(window.location.pathname));
   const updateLocation = (newLocation: Location) => {
     setLocation(newLocation);
@@ -207,4 +207,4 @@ function Topic({
   return <h3>Requested topic ID: {topicId}</h3>;
 }
 
-export default App;
+

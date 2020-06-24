@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import Link from '../../1-react-router/common/Link';
 import window from '../1-router/NodeSafeWindow';
 
-const App = ({
+export default function App({
   initialUrl,
   fetched,
 }: {
   initialUrl: string;
   fetched: string;
-}) => {
+}) {
   const [counter, setCounter] = useState(0);
   const [pathname, setPathname] = useState(initialUrl);
   const updateLocation = (newLocation: string) => {
@@ -86,4 +86,4 @@ function Users() {
   return <h2>Users</h2>;
 }
 
-export default App;
+

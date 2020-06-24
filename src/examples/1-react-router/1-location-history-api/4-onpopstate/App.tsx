@@ -1,7 +1,7 @@
 import React, {  useState } from 'react';
 import Link from '../../common/Link';
 
-const App = () => {
+export default function App() {
   const [counter, setCounter] = useState(0);
   const [pathname, setPathname] = useState(window.location.pathname);
   const updatePathname = (newLocation: string) => {
@@ -78,4 +78,4 @@ function Users() {
   return <h2>Users</h2>;
 }
 
-export default App;
+

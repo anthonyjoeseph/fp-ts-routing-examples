@@ -4,7 +4,7 @@ import AddTodo from '../../../2-data-model/1-simple-todo/components/AddTodo';
 import TodoList from '../../../2-data-model/1-simple-todo/components/TodoList';
 import Footer from '../../../2-data-model/1-simple-todo/components/Footer';
 
-const App = () => {
+export default function App() {
   const [state, setState] = useState<AppState>(defaultAppState);
   const {
     todos,
@@ -63,4 +63,3 @@ const App = () => {
   )
 }
 
-export default App;

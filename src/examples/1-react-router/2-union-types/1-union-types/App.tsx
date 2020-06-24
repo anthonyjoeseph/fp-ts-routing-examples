@@ -19,7 +19,7 @@ const componentFromPathname = (pathname: Pathname): JSX.Element => {
   }
 };
 
-const App = () => {
+export default function App() {
   const [counter, setCounter] = useState(0);
   const [pathname, setPathname] = useState<Pathname>(window.location.pathname as Pathname);
   const updatePathname = (newurl: Pathname) => {
@@ -80,5 +80,3 @@ function About() {
 function Users() {
   return <h2>Users</h2>;
 }
-
-export default App;
