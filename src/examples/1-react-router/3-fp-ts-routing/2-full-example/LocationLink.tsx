@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '../../common/Link';
-import { Location, parser, formatter } from './App';
+import { Location, formatter } from './App';
 
 const LocationLink = ({
   to,
@@ -12,7 +12,7 @@ const LocationLink = ({
   children: string;
 }) => <Link
   to={formatter(to)}
-  updateLocation={url => updateLocation(parser(url))}
+  updateLocation={() => updateLocation(to)}
   children={children}
 />;
 

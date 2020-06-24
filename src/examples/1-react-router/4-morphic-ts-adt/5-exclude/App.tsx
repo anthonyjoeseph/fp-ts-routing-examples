@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { end, lit, str, } from 'fp-ts-routing';
 import { routingFromMatches4 } from 'morphic-ts-routing';
 import { ADTType } from '@morphic-ts/adt';
+import LocationLink from './LocationLink';
 
 export const {
   parse,
@@ -23,26 +24,6 @@ const TopicLocation = Location.select([
 ]);
 type TopicLocation = ADTType<typeof TopicLocation>
 
-const Link = ({
-  to,
-  updateLocation,
-  children,
-}: {
-  to: Location;
-  updateLocation: (to: Location) => void;
-  children: string;
-}) => (
-  <a
-    href={format(to)}
-    onClick={(event) => {
-      event.preventDefault();
-      updateLocation(to);
-    }}
-  >
-    {children}
-  </a>
-);
-
 export default function App() {
   const [location, setLocation] = useState<ParseableLocation>(parse(window.location.pathname));
   const updateLocation = (newLocation: Location) => {
@@ -56,28 +37,28 @@ export default function App() {
     <div>
       <ul>
         <li>
-          <Link
+          <LocationLink
             to={Location.of.Home({ value: {} })}
             updateLocation={updateLocation}
           >
             Home
-          </Link>
+          </LocationLink>
         </li>
         <li>
-          <Link
+          <LocationLink
             to={Location.of.About({ value: {} })}
             updateLocation={updateLocation}
           >
             About
-          </Link>
+          </LocationLink>
         </li>
         <li>
-          <Link
+          <LocationLink
             to={Location.of.Topics({ value: {} })}
             updateLocation={updateLocation}
           >
             Topics
-          </Link>
+          </LocationLink>
         </li>
       </ul>
       {ParseableLocation.matchStrict<JSX.Element>({
@@ -117,20 +98,20 @@ function Topics({
       <h2>Topics</h2>
       <ul>
         <li>
-          <Link
+          <LocationLink
             to={TopicLocation.of.TopicsID({ value: { id: 'components' } })}
             updateLocation={updateLocation}
           >
             Components
-          </Link>
+          </LocationLink>
         </li>
         <li>
-          <Link
+          <LocationLink
             to={TopicLocation.of.TopicsID({ value: { id: 'props-v-state' } })}
             updateLocation={updateLocation}
           >
             Props v. State
-          </Link>
+          </LocationLink>
         </li>
       </ul>
       {TopicLocation.match({

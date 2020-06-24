@@ -12,7 +12,7 @@ const LocationLink = ({
   children: string;
 }) => <Link
   to={format(to)}
-  updateLocation={url => updateLocation(parse(url))}
+  updateLocation={() => updateLocation(to)}
   children={children}
 />;
 
