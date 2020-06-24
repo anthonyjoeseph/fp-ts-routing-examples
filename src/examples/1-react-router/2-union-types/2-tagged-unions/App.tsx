@@ -96,7 +96,7 @@ const componentFromLocation = (
         updateLocation={updateLocation}
       />;
     case 'NotFound':
-      return <div />
+      return <Home />
   }
 }
 
@@ -149,7 +149,7 @@ export default function App() {
             }}
             updateLocation={updateLocation}
           >
-            Users
+            Topics
           </LocationLink>
         </li>
       </ul>
