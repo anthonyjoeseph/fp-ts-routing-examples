@@ -1,4 +1,4 @@
-import { end, lit, str, Route, parse, format } from 'fp-ts-routing';
+import * as R from 'fp-ts-routing';
 import React, { useState } from 'react';
 import LocationLink from './LocationLink';
 
@@ -28,12 +28,12 @@ export type Location = Home | About | Topics
 
 type TopicLocation = Topics | TopicsID
 
-const home = end
-const about = lit('about').then(end)
-const topics = lit('topics').then(end)
-const topicsID = lit('topics')
-  .then(str('id'))
-  .then(end)
+const home = R.end
+const about = R.lit('about').then(R.end)
+const topics = R.lit('topics').then(R.end)
+const topicsID = R.lit('topics')
+  .then(R.str('id'))
+  .then(R.end)
 
 const router = /*zero<Location>().alt*/home.parser.map<Location>(
     () => ({
@@ -51,69 +51,58 @@ const router = /*zero<Location>().alt*/home.parser.map<Location>(
     id,
   })))
 
-export const parser = (s: string): Location => parse(
+export const parse = (s: string): Location => R.parse(
   router,
-  Route.parse(s),
+  R.Route.parse(s),
   { type: 'NotFound' },
 )
-export const formatter = (l: Location): string => {
+export const format = (l: Location): string => {
   switch (l.type) {
     case 'Home':
-      return format(home.formatter, l);
+      return R.format(home.formatter, l);
     case 'About':
-      return format(about.formatter, l);
+      return R.format(about.formatter, l);
     case 'Topics':
-      return format(topics.formatter, l);
+      return R.format(topics.formatter, l);
     case 'TopicsID':
-      return format(topicsID.formatter, l);
+      return R.format(topicsID.formatter, l);
     case 'NotFound':
       return '/';
   }
 }
 
-
-const componentFromLocation = (
-  location: Location,
-  updateLocation: (l: Location) => void,
-): JSX.Element => {
-  switch (location.type) {
-    case 'Home':
-      return <Home />;
-    case 'About':
-      return  <About />;
-    case 'Topics':
-      return  <Topics
-        location={location}
-        updateLocation={updateLocation}
-      />;
-    case 'TopicsID':
-      return <Topics
-        location={location}
-        updateLocation={updateLocation}
-      />;
-    case 'NotFound':
-      return <div />
-  }
-}
-
-const topicFromLocation = (location: TopicLocation): JSX.Element => {
-  switch (location.type) {
-    case 'Topics':
-      return <h3>Please select a topic.</h3>
-    case 'TopicsID':
-      return <Topic topicId={location.id} />
-  }
-};
-
 export default function App() {
-  const [location, setLocation] = useState<Location>(parser(window.location.pathname));
+  const [location, setLocation] = useState<Location>(parse(window.location.pathname));
   const updateLocation = (newLocation: Location) => {
     setLocation(newLocation);
-    window.history.pushState(null, '', formatter(newLocation));
+    window.history.pushState(null, '', format(newLocation));
   }
   window.addEventListener('popstate', () => {
-    setLocation(parser(window.location.pathname));
+    setLocation(parse(window.location.pathname));
   });
+  let innerComponent: JSX.Element;
+  switch (location.type) {
+    case 'Home':
+      innerComponent = <Home />;
+      break;
+    case 'About':
+      innerComponent = <About />;
+      break;
+    case 'Topics':
+      innerComponent = <Topics
+        location={location}
+        updateLocation={updateLocation}
+      />;
+      break;
+    case 'TopicsID':
+      innerComponent = <Topics
+        location={location}
+        updateLocation={updateLocation}
+      />;
+      break;
+    case 'NotFound':
+      innerComponent = <Home />
+  }
   return (
     <div>
       <ul>
@@ -144,11 +133,11 @@ export default function App() {
             }}
             updateLocation={updateLocation}
           >
-            Users
+            Topics
           </LocationLink>
         </li>
       </ul>
-      {componentFromLocation(location, setLocation)}
+      {innerComponent}
     </div>
   );
 }
@@ -168,6 +157,15 @@ function Topics({
   location: TopicLocation,
   updateLocation: (l: Location) => void,
 }) {
+  let innerComponent: JSX.Element;
+  switch (location.type) {
+    case 'Topics':
+      innerComponent = <h3>Please select a topic.</h3>;
+      break;
+    case 'TopicsID':
+      innerComponent = <Topic topicId={location.id} />;
+      break;
+  }
   return (
     <div>
       <h2>Topics</h2>
@@ -189,7 +187,7 @@ function Topics({
           </LocationLink>
         </li>
       </ul>
-      {topicFromLocation(location)}
+      {innerComponent}
     </div>
   );
 }
@@ -201,5 +199,3 @@ function Topic({
 }) {
   return <h3>Requested topic ID: {topicId}</h3>;
 }
-
-

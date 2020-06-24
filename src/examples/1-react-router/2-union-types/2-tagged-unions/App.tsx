@@ -75,50 +75,38 @@ export const format = (parsed: Location): string => {
   }
 }
 
-
-const componentFromLocation = (
-  location: Location,
-  updateLocation: (l: Location) => void,
-): JSX.Element => {
-  switch (location.type) {
-    case 'Home':
-      return <Home />;
-    case 'About':
-      return  <About />;
-    case 'Topics':
-      return  <Topics
-        location={location}
-        updateLocation={updateLocation}
-      />;
-    case 'TopicsID':
-      return <Topics
-        location={location}
-        updateLocation={updateLocation}
-      />;
-    case 'NotFound':
-      return <Home />
-  }
-}
-
-const topicFromLocation = (location: TopicLocation): JSX.Element => {
-  switch (location.type) {
-    case 'Topics':
-      return <h3>Please select a topic.</h3>
-    case 'TopicsID':
-      return <Topic topicId={location.id} />
-  }
-};
-
 export default function App() {
   const [location, setLocation] = useState<Location>(parse(window.location.pathname));
   const updateLocation = (newLocation: Location) => {
     setLocation(newLocation);
     window.history.pushState(null, '', format(newLocation));
   }
-
   window.addEventListener('popstate', () => {
     setLocation(parse(window.location.pathname));
   });
+  let innerComponent: JSX.Element;
+  switch (location.type) {
+    case 'Home':
+      innerComponent = <Home />;
+      break;
+    case 'About':
+      innerComponent = <About />;
+      break;
+    case 'Topics':
+      innerComponent = <Topics
+        location={location}
+        updateLocation={updateLocation}
+      />;
+      break;
+    case 'TopicsID':
+      innerComponent = <Topics
+        location={location}
+        updateLocation={updateLocation}
+      />;
+      break;
+    case 'NotFound':
+      innerComponent = <Home />
+  }
   return (
     <div>
       <ul>
@@ -153,7 +141,7 @@ export default function App() {
           </LocationLink>
         </li>
       </ul>
-      {componentFromLocation(location, setLocation)}
+      {innerComponent}
     </div>
   );
 }
@@ -173,6 +161,15 @@ function Topics({
   location: TopicLocation,
   updateLocation: (l: Location) => void,
 }) {
+  let innerComponent: JSX.Element;
+  switch (location.type) {
+    case 'Topics':
+      innerComponent = <h3>Please select a topic.</h3>;
+      break;
+    case 'TopicsID':
+      innerComponent = <Topic topicId={location.id} />;
+      break;
+  }
   return (
     <div>
       <h2>Topics</h2>
@@ -194,7 +191,7 @@ function Topics({
           </LocationLink>
         </li>
       </ul>
-      {topicFromLocation(location)}
+      {innerComponent}
     </div>
   );
 }
