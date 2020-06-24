@@ -25,9 +25,9 @@ interface NotFound {
 export type Location = Home | About | Topics
 | TopicsID | NotFound
 
-export const parse = (unparsed: string): Location => {
-  if (unparsed.startsWith('/topics')) {
-    const remaining = unparsed.replace('/topics', '')
+export const parse = (pathname: string): Location => {
+  if (pathname.startsWith('/topics')) {
+    const remaining = pathname.replace('/topics', '')
     if (remaining === '' || remaining === '/') {
       return { type: 'Topics' }
     }
@@ -42,7 +42,7 @@ export const parse = (unparsed: string): Location => {
       type: 'NotFound',
     }
   }
-  switch (unparsed) {
+  switch (pathname) {
     case '/':
       return {
         type: 'Home',
@@ -58,8 +58,8 @@ export const parse = (unparsed: string): Location => {
   }
 };
 
-export const format = (parsed: Location): string => {
-  switch (parsed.type) {
+export const format = (location: Location): string => {
+  switch (location.type) {
     case 'Home':
       return '/';
     case 'About':
@@ -67,7 +67,7 @@ export const format = (parsed: Location): string => {
     case 'Topics':
       return  '/topics';
     case 'TopicsID':
-      return `/topics/${parsed.id}`;
+      return `/topics/${location.id}`;
     case 'NotFound':
       return '';
   }
