@@ -12,7 +12,7 @@ const PathnameLink = ({
   children: string;
 }) => <Link
   to={to}
-  updateLocation={url => updateLocation(url as Pathname)}
+  updateLocation={() => updateLocation(to)}
   children={children}
 />;
 
