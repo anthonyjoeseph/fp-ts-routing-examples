@@ -3,21 +3,6 @@ import PathnameLink from './PathnameLink';
 
 export type Pathname = '/' | '/about' | '/users'
 
-const componentFromPathname = (
-  pathname: string
-): JSX.Element => {
-  switch(pathname as Pathname) {
-    case '/':
-      return <Home />;
-    case '/about':
-      return  <About />;
-    case '/users':
-      return  <Users />;
-    default:
-      return <Home />;
-  }
-};
-
 export default function App() {
   const [counter, setCounter] = useState(0);
   const [pathname, setPathname] = useState<string>(window.location.pathname);
@@ -28,6 +13,21 @@ export default function App() {
   window.addEventListener('popstate', () => {
     setPathname(window.location.pathname);
   });
+  let innerComponent: JSX.Element;
+  switch(pathname as Pathname) {
+    case '/':
+      innerComponent = <Home />;
+      break;
+    case '/about':
+      innerComponent = <About />;
+      break;
+    case '/users':
+      innerComponent = <Users />;
+      break;
+    default:
+      innerComponent = <Home />;
+      break;
+  }
   return (
     <div>
       <button
@@ -63,7 +63,7 @@ export default function App() {
           </li>
         </ul>
       </nav>
-        {componentFromPathname(pathname)}
+        {innerComponent}
     </div>
   );
 }
