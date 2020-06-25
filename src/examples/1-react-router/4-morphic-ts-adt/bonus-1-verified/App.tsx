@@ -26,19 +26,9 @@ const HomeLocation = Location.select([
 type HomeLocation = ADTType<typeof HomeLocation>
 
 const TopicLocation = Location.select([
-  'Topics','TopicsID',
+  'Topics', 'TopicsID',
 ])
 type TopicLocation = ADTType<typeof TopicLocation>
-
-const maybeHomeLocation = O.fromPredicate(
-  (l: ParseableLocation): l is HomeLocation =>
-    HomeLocation.verified(l as HomeLocation)
-);
-
-const maybeTopicLocation = O.fromPredicate(
-  (l: ParseableLocation): l is TopicLocation =>
-    TopicLocation.verified(l as TopicLocation)
-);
 
 const Link = ({
   to,
@@ -98,15 +88,15 @@ export default function App() {
         </li>
       </ul>
       {pipe(
-        location,
-        maybeHomeLocation,
+        location as HomeLocation,
+        O.fromPredicate(HomeLocation.verified),
         O.map(HomeLocation.match({
           Home: () => <Home />,
           About: () => <About />,
         })),
         O.alt(() => pipe(
-          location,
-          maybeTopicLocation,
+          location as TopicLocation,
+          O.fromPredicate(TopicLocation.verified),
           O.map(l => (
             <Topics
               location={l}
@@ -114,6 +104,7 @@ export default function App() {
             />
           ))
         )),
+        // Not Found
         O.getOrElse((): JSX.Element => <Home />),
       )}
     </div>
