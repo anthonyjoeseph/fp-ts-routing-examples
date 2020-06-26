@@ -1,34 +1,31 @@
-import React, { useState } from 'react';
-import Link from '../../1-react-router/common/Link';
-import window from '../1-router/NodeSafeWindow';
+import React, {  useState } from 'react';
+import PathnameLink from './PathnameLink';
 
-export default function App({
-  initialUrl,
-}: {
-  initialUrl: string;
-}) {
+export type Pathname = '/' | '/about' | '/users'
+
+export default function App() {
   const [counter, setCounter] = useState(0);
-  const [pathname, setPathname] = useState(initialUrl);
-  const updatePathname = (newLocation: string) => {
-    setPathname(newLocation);
-    window.history.pushState(null, '', newLocation);
+  const [pathname, setPathname] = useState<string>(window.location.pathname);
+  const updatePathname = (newurl: string) => {
+    setPathname(newurl);
+    window.history.pushState(null, '', newurl);
   }
   window.addEventListener('popstate', () => {
     setPathname(window.location.pathname);
-  })
+  });
   let innerComponent: JSX.Element;
-  switch (pathname) {
+  switch(pathname as Pathname) {
     case '/':
       innerComponent = <Home />;
       break;
     case '/about':
-      innerComponent =  <About />;
+      innerComponent = <About />;
       break;
     case '/users':
-      innerComponent =  <Users />;
+      innerComponent = <Users />;
       break;
     default:
-      innerComponent = <div />;
+      innerComponent = <Home />;
       break;
   }
   return (
@@ -41,28 +38,28 @@ export default function App({
       <nav>
         <ul>
           <li>
-            <Link
+            <PathnameLink
               to="/"
               updatePathname={updatePathname}
             >
               Home
-            </Link>
+            </PathnameLink>
           </li>
           <li>
-            <Link
+            <PathnameLink
               to="/about"
               updatePathname={updatePathname}
             >
               About
-            </Link>
+            </PathnameLink>
           </li>
           <li>
-            <Link
+            <PathnameLink
               to="/users"
               updatePathname={updatePathname}
             >
               Users
-            </Link>
+            </PathnameLink>
           </li>
         </ul>
       </nav>
@@ -82,5 +79,3 @@ function About() {
 function Users() {
   return <h2>Users</h2>;
 }
-
-

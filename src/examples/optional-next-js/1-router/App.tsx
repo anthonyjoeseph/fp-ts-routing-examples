@@ -5,7 +5,7 @@ import window from './NodeSafeWindow';
 export default function App() {
   const [counter, setCounter] = useState(0);
   const [pathname, setPathname] = useState(window.location.pathname);
-  const updateLocation = (newLocation: string) => {
+  const updatePathname = (newLocation: string) => {
     setPathname(newLocation);
     window.history.pushState(null, '', newLocation);
   }
@@ -39,7 +39,7 @@ export default function App() {
           <li>
             <Link
               to="/"
-              updateLocation={updateLocation}
+              updatePathname={updatePathname}
             >
               Home
             </Link>
@@ -47,7 +47,7 @@ export default function App() {
           <li>
             <Link
               to="/about"
-              updateLocation={updateLocation}
+              updatePathname={updatePathname}
             >
               About
             </Link>
@@ -55,7 +55,7 @@ export default function App() {
           <li>
             <Link
               to="/users"
-              updateLocation={updateLocation}
+              updatePathname={updatePathname}
             >
               Users
             </Link>

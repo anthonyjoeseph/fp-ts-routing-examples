@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-import Link from '../../1-react-router/common/Link';
-import window from '../1-router/NodeSafeWindow';
+import React, {  useState } from 'react';
+import Link from '../common/Link';
 
-export default function App({
-  initialUrl,
-}: {
-  initialUrl: string;
-}) {
+export default function App() {
   const [counter, setCounter] = useState(0);
-  const [pathname, setPathname] = useState(initialUrl);
+  const [pathname, setPathname] = useState(window.location.pathname);
   const updatePathname = (newLocation: string) => {
     setPathname(newLocation);
     window.history.pushState(null, '', newLocation);
   }
   window.addEventListener('popstate', () => {
     setPathname(window.location.pathname);
-  })
+  });
   let innerComponent: JSX.Element;
   switch (pathname) {
     case '/':
@@ -28,7 +23,7 @@ export default function App({
       innerComponent =  <Users />;
       break;
     default:
-      innerComponent = <div />;
+      innerComponent = <Home />;
       break;
   }
   return (
@@ -66,7 +61,7 @@ export default function App({
           </li>
         </ul>
       </nav>
-        {innerComponent}
+      {innerComponent}
     </div>
   );
 }

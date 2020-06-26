@@ -2,18 +2,18 @@ import React from 'react';
 
 const Link = ({
   to,
-  updateLocation,
+  updatePathname,
   children,
 }: {
   to: string;
-  updateLocation: (to: string) => void;
+  updatePathname: (to: string) => void;
   children: string;
 }) => (
   <a
     href={to}
     onClick={(event) => {
       event.preventDefault();
-      updateLocation(to);
+      updatePathname(to);
     }}
   >
     {children}
