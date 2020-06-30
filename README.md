@@ -2,30 +2,18 @@
 # Examples
   1. React Router
       1. Location & History APIs
-          1. React Router
-          2. Router from Scratch
-          3. Clobbered State
-          4. Set Href
-          5. pushState redirect
-          6. Location in State
-          7. onpopstate
-          8. Bonus - What's history state?
-      2. Union Types
-          1. Union types
-          2. Exhaustiveness Checking
-          3. React Router Params
+          0. React Router
+          1. pathname, anchor
+          2. pushState, onpopstate
+          - Bonus - What's history state?
+          3. Union types
           4. Tagged Unions
-      3. fp-ts-routing
-          1. Parser
-          2. Full Example
-          3. Bonus: Ints, Queries and Types
-      4. @morphic-ts/adt
-          1. makeADT, of
-          2. morphic-ts-routing
-          3. full example
-          4. select
-          5. Bonus: smart constructor
-          6. Bonus: other sum type libraries
+          5. fp-ts-routing
+          - Bonus: Ints, Queries and Types
+          6. morphic-ts
+          - Bonus: verified
+          - Bonus: other sum type libraries
+          7. morphic-ts-routing
   - (Optional) Next.js & SSR
       1. Router
       2. Removing flicker
