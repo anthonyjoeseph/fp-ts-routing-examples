@@ -30,10 +30,20 @@ const topicsID = R.lit('topics')
   .then(R.str('id'))
   .then(R.end);
 
-const router = home.parser
-  .map<Location>(() => ({
-    type: 'Home',
-  }))
+const router = topicsID.parser
+  .map<Location>(obj => {
+    return {
+      type: 'TopicsID',
+      id: obj.id,
+    };
+  })
+  .alt(
+    home.parser.map(() => {
+      return {
+        type: 'Home',
+      };
+    }),
+  )
   .alt(
     about.parser.map(() => ({
       type: 'About',
@@ -43,29 +53,12 @@ const router = home.parser
     topics.parser.map(() => ({
       type: 'Topics',
     })),
-  )
-  .alt(
-    topicsID.parser.map(({ id }) => ({
-      type: 'TopicsID',
-      id,
-    })),
   );
 
 const parse = (s: string): Location =>
-  R.parse(router, R.Route.parse(s), { type: 'NotFound' });
-
-const locations = [
-  parse(''),
-  parse('/'),
-  parse('/about'),
-  parse('about'),
-  parse('/topics'),
-  parse('/topics/'),
-  parse('/topics/anything'),
-];
-locations.forEach(location => {
-  console.log(`parsed location type: ${JSON.stringify(location)}`);
-});
+  R.parse<Location>(router, R.Route.parse(s), {
+    type: 'NotFound',
+  });
 
 const format = (l: Location): string => {
   switch (l.type) {
@@ -82,13 +75,27 @@ const format = (l: Location): string => {
   }
 };
 
-const urls = [
-  format({ type: 'Home' }),
-  format({ type: 'About' }),
-  format({ type: 'Topics' }),
-  format({ type: 'TopicsID', id: 'someid' }),
-  format({ type: 'NotFound' }),
+const parseExamples = [
+  parse('/topics/anything'),
+  parse('/bad/anything'),
+  parse('/topics/anything/whoops'),
+  parse(''),
+  parse('/'),
+  parse('about'),
+  parse('/about'),
+  parse('about/'),
+  parse('/about/'),
 ];
-urls.forEach(urls => {
-  console.log(`formatted url: ${urls}`);
-});
+parseExamples.forEach(ex => console.log(ex));
+
+const formatExamples = [
+  format({
+    type: 'TopicsID',
+    id: 'anything',
+  }),
+  format({
+    type: 'TopicsID',
+    id: 'What will happen?',
+  }),
+];
+formatExamples.forEach(ex => console.log(ex));
