@@ -79,6 +79,7 @@ const parseExamples = [
   parse('/topics/anything'),
   parse('/bad/anything'),
   parse('/topics/anything/whoops'),
+  parse('/topics/What%20will%20happen%3F'),
   parse(''),
   parse('/'),
   parse('about'),

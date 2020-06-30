@@ -1,3 +1,4 @@
+import * as R from 'fp-ts-routing';
 import React, { useState } from 'react';
 import LocationLink from './LocationLink';
 
@@ -25,53 +26,55 @@ interface NotFound {
 export type Location = Home | About | Topics
 | TopicsID | NotFound
 
-export const parse = (pathname: string): Location => {
-  if (pathname.startsWith('/topics')) {
-    const remaining = pathname.replace('/topics', '')
-    if (remaining === '' || remaining === '/') {
-      return { type: 'Topics' }
-    }
-    if (remaining.charAt(0) === '/') {
-      const topicID = remaining.slice(1)
-      return {
-        type: 'TopicsID',
-        id: topicID,
-      }
-    }
+const home = R.end;
+const about = R.lit('about').then(R.end);
+const topics = R.lit('topics').then(R.end);
+const topicsID = R.lit('topics')
+  .then(R.str('id'))
+  .then(R.end);
+
+const router: R.Parser<Location> = topicsID.parser
+  .map<Location>(obj => {
     return {
-      type: 'NotFound',
-    }
-  }
-  switch (pathname) {
-    case '/':
+      type: 'TopicsID',
+      id: obj.id,
+    };
+  })
+  .alt(
+    home.parser.map(() => {
       return {
         type: 'Home',
       };
-    case '/about':
-      return  {
-        type: 'About',
-      };
-    default:
-      return {
-        type: 'NotFound'
-      };
+    }),
+  )
+  .alt(
+    about.parser.map(() => ({
+      type: 'About',
+    })),
+  )
+  .alt(
+    topics.parser.map(() => ({
+      type: 'Topics',
+    })),
+  );
+
+export const parse = (s: string): Location =>
+  R.parse<Location>(router, R.Route.parse(s), { type: 'NotFound' });
+
+export const format = (l: Location): string => {
+  switch (l.type) {
+    case 'Home':
+      return R.format(home.formatter, l);
+    case 'About':
+      return R.format(about.formatter, l);
+    case 'Topics':
+      return R.format(topics.formatter, l);
+    case 'TopicsID':
+      return R.format(topicsID.formatter, l);
+    case 'NotFound':
+      return '/';
   }
 };
-
-export const format = (location: Location): string => {
-  switch (location.type) {
-    case 'Home':
-      return '/';
-    case 'About':
-      return '/about';
-    case 'Topics':
-      return  '/topics';
-    case 'TopicsID':
-      return `/topics/${location.id}`;
-    case 'NotFound':
-      return '';
-  }
-}
 
 export default function App() {
   const [location, setLocation] = useState<Location>(parse(window.location.pathname));
