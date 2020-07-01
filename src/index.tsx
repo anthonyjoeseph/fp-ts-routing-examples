@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './examples/1-react-router/6-morphic-ts/App';
+import App from './examples/1-react-router/7-morphic-ts-routing/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
