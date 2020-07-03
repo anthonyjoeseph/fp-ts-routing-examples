@@ -9,7 +9,7 @@
     "express": "^4.17.1",
     "fp-ts-routing": "^0.5.3",
     "fp-ts-rxjs": "^0.6.9",
-    "io-ts": "^2.2.3",
+    "io-ts": "^2.2.7",
     "monocle-ts": "^2.1.1",
     "morphic-ts-routing": "^0.0.45",
     "node-fetch": "^2.6.0",

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Request, Response } from 'express';
-import { ParamsDictionary } from 'express-serve-static-core';
-import QueryString from 'qs';
+import type { Request, Response } from 'express';
+import type { ParamsDictionary } from 'express-serve-static-core';
+import type QueryString from 'qs';
 import fetch from 'node-fetch';
+import React from 'react';
 import generateClient from '../../../../server/GenerateClient';
 import App from './App';
 

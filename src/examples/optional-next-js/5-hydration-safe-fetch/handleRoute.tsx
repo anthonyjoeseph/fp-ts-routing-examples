@@ -1,15 +1,15 @@
-import React from 'react';
-import { Request, Response } from 'express';
-import { ParamsDictionary } from 'express-serve-static-core';
-import QueryString from 'qs';
+import type { Request, Response } from 'express';
+import type { ParamsDictionary } from 'express-serve-static-core';
+import type QueryString from 'qs';
 import fetch from 'node-fetch';
+import React from 'react';
 import generateClient from '../../../../server/GenerateClient';
 import App from './App';
 
 const handleRoute = async (
   req: Request<ParamsDictionary, unknown, unknown, QueryString.ParsedQs>,
   res: Response<string>,
-) => {
+) => {  
   try {
     const fetched = await fetch('https://reqres.in/api/users?page=2')
       .then(resp => resp.text())
